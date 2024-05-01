@@ -1,9 +1,11 @@
-"use client";
+import { Button } from "@nextui-org/react";
 import React from "react";
 
-const BaseButton = () => {
+const BaseButton = ({ title, onclick, ...props }) => {
   return (
-    <button onClick={() => alert(`Hello Insights Friend, this base url api : ${process.env.NEXT_PUBLIC_BASE_URL}`)}>Click Me</button>
+    <Button onClick={onclick} {...props}>
+      {title}
+    </Button>
   );
 };
 
