@@ -18,7 +18,7 @@ import {
 import { FiSearch } from "react-icons/fi";
 
 const NavigationBar = () => {
-  const variants = ["underlined"];
+  const variants = ["underlined"]; // navbar ini
 
   return (
     <div className="sticky top-0 ">
