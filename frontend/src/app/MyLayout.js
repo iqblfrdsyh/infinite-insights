@@ -8,7 +8,7 @@ export function MyLayout({ children }) {
   const router = usePathname();
   const pathname = router;
 
-  const isLoginPage = pathname === "/login" || pathname === "/signup";
+  const isLoginPage = pathname === "/login" || pathname === "/regist";
 
   return (
     <NextUIProvider>
