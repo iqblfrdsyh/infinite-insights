@@ -1,18 +1,18 @@
 import React from 'react'
-import { Input, Button, Link } from "@nextui-org/react";
+import { Input, Button, Link, Image } from "@nextui-org/react";
 
-const login = () => {
+const Login = () => {
   return (
     <div className="h-screen flex">
       <div className="relative bg-white w-1/2 border-e-2 pe-10">
-        <img
-          src="./asset/pentol.png"
+        <Image
+          src="/assets/images/pentol.png"
           className="object-cover w-full h-full"
           alt="Gambar latar belakang"
         />
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
+        <div className="absolute top-0 left-0 w-full h-screen flex flex-col items-center justify-center">
           <div className="text-center flex">
-            <img src="./asset/logo.png" className="me-2" />
+            <Image src="/assets/images/logo.png" className="me-3" />
             <h2 className="text-6xl font-nunito font-semibold">Insight</h2>
           </div>
           <div className="text-center mt-2">
@@ -67,4 +67,4 @@ const login = () => {
   );
 }
 
-export default login
+export default Login
