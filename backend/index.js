@@ -32,7 +32,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.send({ message: "Route Not Found" });
+  res.send({
+    message: `Not found route : http://localhost:${PORT}${req.params[0]}`,
+  });
 });
 
 app.listen(PORT, () => {
