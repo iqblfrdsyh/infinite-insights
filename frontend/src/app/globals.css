@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital@0;1&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,6 +28,14 @@ main {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+nav {
+  justify-content: space-between !important;
+}
+
+header {
+  max-width: 100% !important;
 }
 
 @layer utilities {
