@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import {
   Navbar,
@@ -30,6 +31,7 @@ const NavigationBar = () => {
     <div className="sticky top-0 z-50">
       <Navbar
         isBordered
+        isBlurred={false}
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
         className="px-[25px]"
