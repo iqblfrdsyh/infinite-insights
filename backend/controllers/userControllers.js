@@ -1,5 +1,7 @@
 const { User } = require("../helper/relation");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require("uuid");
 
 exports.getUsers = async (req, res) => {
   try {
@@ -11,6 +13,17 @@ exports.getUsers = async (req, res) => {
     console.log(error);
   }
 };
+exports.getUserById = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const data = await User.findAll({ where: { id: userId } });
+    !data.length
+      ? res.json({ msg: `Tidak ada user dengan insight ID : ${userId}` })
+      : res.status(200).json({ status: "Ok", data });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 function trimmedValue(value) {
   const isString = typeof value === "string" ? value : String(value);
@@ -18,7 +31,7 @@ function trimmedValue(value) {
 }
 
 exports.userSignup = async (req, res) => {
-  const { fullname, username, password, confirmPass } = req.body;
+  const { fullname, username, password, headline, confirmPassword } = req.body;
   try {
     if (
       !trimmedValue(fullname) ||
@@ -28,7 +41,7 @@ exports.userSignup = async (req, res) => {
       return res.status(400).json({ msg: "Data tidak boleh kosong" });
     }
 
-    if (password !== confirmPass) {
+    if (password !== confirmPassword) {
       return res.status(400).json({ msg: "Konfirmasi Password Tidak Sesuai" });
     }
 
@@ -49,7 +62,7 @@ exports.userSignup = async (req, res) => {
       id: userID,
       fullname,
       username,
-      headline: "",
+      headline: headline ? headline : "",
       password: hashedPassword,
     });
 
@@ -69,6 +82,10 @@ exports.userLogin = async (req, res) => {
       },
     });
 
+    if (!trimmedValue(username) || !trimmedValue(password)) {
+      return res.status(400).json({ msg: "Input tidak boleh kosong" });
+    }
+
     if (user.length === 0) {
       return res.status(404).json({ msg: "Username tidak ditemukan" });
     }
@@ -84,14 +101,14 @@ exports.userLogin = async (req, res) => {
     const headline = user[0].headline;
 
     const accessToken = jwt.sign(
-      { userId, email },
+      { userId, uname },
       process.env.SECRET_ACCESS_TOKEN,
       {
         expiresIn: "2m",
       }
     );
     const refreshToken = jwt.sign(
-      { userId, email },
+      { userId, uname },
       process.env.SECRET_REFRESH_TOKEN,
       {
         expiresIn: "1d",
@@ -129,6 +146,8 @@ exports.updateUser = async (req, res) => {
       where: { id: userId },
     });
 
+    if (!userId) return res.status(400).json({ msg: "Id user tidak ada" });
+
     if (!existingUser) {
       return res.status(404).json({ msg: "User tidak ditemukan" });
     }
@@ -158,7 +177,7 @@ exports.updateUser = async (req, res) => {
 
     const updatedUser = await User.findOne({
       where: { id: userId },
-      attributes: ["id", "fullname", "username", "headline"],
+      attributes: ["id", "fullname", "username", "headline", "password"],
     });
 
     res.json({ status: "Updated", user: updatedUser });

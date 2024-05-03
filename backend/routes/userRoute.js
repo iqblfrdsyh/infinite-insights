@@ -8,12 +8,16 @@ const {
   userLogout,
   updateUser,
   userLogin,
+  getUserById,
 } = require("../controllers/userControllers");
+const { verifyToken } = require("../middleware/verifyToken");
 
 router.get("/users", getUsers);
+router.get("/user/:userId", getUserById);
 router.post("/user/signup", userSignup);
-router.put("/user/login", userLogin);
-router.get("/user/me", checkLogin);
+router.post("/user/signin", userLogin);
+router.put("/user/update", verifyToken, updateUser);
+router.get("/user/me", verifyToken, checkLogin);
 router.delete("/user/logout", userLogout);
 
 module.exports = router;
