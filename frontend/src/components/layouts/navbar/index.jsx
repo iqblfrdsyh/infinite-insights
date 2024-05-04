@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -19,9 +20,44 @@ import {
 import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { logout, refreshToken, updateToken } from "@/libs/api-libs";
+import { jwtDecode } from "jwt-decode";
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [decoded, setDecoded] = useState();
+
+  const router = useRouter();
+
+  const getToken = async () => {
+    try {
+      const data = await refreshToken("token");
+      updateToken(data.accessToken);
+      const decoded = jwtDecode(data.accessToken);
+      setDecoded(decoded);
+      setIsLogin(true);
+    } catch (error) {
+      if (error.response) {
+        setIsLogin(false);
+        router.push("/login");
+      }
+    }
+  };
+
+  const Logout = async () => {
+    try {
+      await logout("user/logout");
+      router.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getToken();
+  }, [isLogin]);
 
   const variants = ["underlined"];
 
@@ -82,28 +118,48 @@ const NavigationBar = () => {
             <Link href="#">Search</Link>
             <IoSearch className="text-[20px]" />
           </NavbarItem>
-          <Dropdown placement="bottom-end">
-            <DropdownTrigger>
-              <Button variant="bordered" className="border-[#69C06D]">
-                <Image
-                  src="/assets/images/person.png"
-                  alt="person"
-                  width={25}
-                  height={25}
-                />
-                <p className="text-inherit font-semibold text-black">Citra</p>
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">zoey@example.com</p>
-              </DropdownItem>
-              <DropdownItem key="logout" color="danger">
-                Log Out
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          {isLogin ? (
+            <Dropdown placement="bottom-end">
+              <DropdownTrigger>
+                <Button variant="bordered" className="border-[#69C06D]">
+                  <Image
+                    src="/assets/images/person.png"
+                    alt="person"
+                    width={25}
+                    height={25}
+                  />
+                  <p className="text-inherit font-semibold text-black">
+                    {decoded.username}
+                  </p>
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Profile Actions" variant="flat">
+                <DropdownItem key="profile" className="h-14 gap-2">
+                  <p className="font-semibold">Signed in as</p>
+                  <p className="font-semibold">zoey@example.com</p>
+                </DropdownItem>
+                <DropdownItem key="logout" color="default">
+                  Profile
+                </DropdownItem>
+                <DropdownItem key="logout" color="default">
+                  My Blog
+                </DropdownItem>
+                <DropdownItem key="logout" color="danger" onClick={Logout}>
+                  Log Out
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          ) : (
+            <Button variant="bordered" className="border-[#69C06D]">
+              <Image
+                src="/assets/images/person.png"
+                alt="person"
+                width={25}
+                height={25}
+              />
+              <p className="text-inherit font-semibold text-black">Guest</p>
+            </Button>
+          )}
         </NavbarContent>
 
         <NavbarMenu className="z-50">
@@ -131,7 +187,7 @@ const NavigationBar = () => {
         </NavbarMenu>
       </Navbar>
       <div className="w-full flex flex-wrap gap-20 justify-center pt-3 bg-white overflow-x-auto max-w-full">
-        {variants.map((variant,index) => (
+        {variants.map((variant, index) => (
           <Tabs variant={variant} key={index}>
             <Tab className="text-lg" key="sport" title="Sport" />
             <Tab className="text-lg" key="music" title="Music" />

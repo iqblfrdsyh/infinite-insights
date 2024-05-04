@@ -1,11 +1,13 @@
-const { User } = require("../helper/relation");
+const { User, Blog } = require("../helper/relation");
+const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { v4: uuidv4 } = require("uuid");
 
 exports.getUsers = async (req, res) => {
   try {
-    const data = await User.findAll();
+    const data = await User.findAll({
+      include: [{ model: Blog, as: "blogs" }],
+    });
     !data.length
       ? res.json({ msg: "Tidak ada data user" })
       : res.status(200).json({ status: "Ok", total: data.length, data });
@@ -13,8 +15,9 @@ exports.getUsers = async (req, res) => {
     console.log(error);
   }
 };
+
 exports.getUserById = async (req, res) => {
-  const userId = req.params.userId;
+  const userId = req.query.userId;
   try {
     const data = await User.findAll({ where: { id: userId } });
     !data.length
@@ -36,7 +39,8 @@ exports.userSignup = async (req, res) => {
     if (
       !trimmedValue(fullname) ||
       !trimmedValue(username) ||
-      !trimmedValue(password)
+      !trimmedValue(password) ||
+      !trimmedValue(confirmPassword)
     ) {
       return res.status(400).json({ msg: "Data tidak boleh kosong" });
     }
@@ -62,7 +66,7 @@ exports.userSignup = async (req, res) => {
       id: userID,
       fullname,
       username,
-      headline: headline ? headline : "",
+      headline: headline || "",
       password: hashedPassword,
     });
 

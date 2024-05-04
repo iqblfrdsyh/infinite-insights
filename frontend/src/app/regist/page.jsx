@@ -1,32 +1,40 @@
 "use client";
+
 import React, { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import { Input, Button, Link, Image } from "@nextui-org/react";
+import { Input, Button, Image } from "@nextui-org/react";
+import Link from "next/link";
+import Swal from "sweetalert2";
+import { signup } from "@/libs/api-libs";
 
 const Regist = () => {
-    const [nama, setNama] = useState("");
-    const [username, setUsername] = useState("");
-    const [pass, setPass] = useState("");
-    const [cpass, setCpass] = useState("");
-    const router = useRouter();
+  const [fullname, setFullname] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const router = useRouter();
 
-    const Register = async(e) =>{
-      e.preventDefault();
-      try {
-        await axios.post("http://localhost:8080/user/signup", {
-          nama: nama,
-          username: username,
-          pass: pass,
-          cpass: pass,
+  const register = async (e) => {
+    e.preventDefault();
+    try {
+      const data = {
+        fullname,
+        username,
+        password,
+        confirmPassword,
+      };
+      await signup("user/signup", data);
+      router.push("/login");
+    } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response.data.msg,
         });
-        router.push("/login");
-      } catch (error) {
-        if(error.response){
-          console.log(error.response.data);
-        }
       }
     }
+  };
 
   return (
     <div className="h-screen flex">
@@ -52,7 +60,7 @@ const Regist = () => {
           Create your account Infinite Insights
         </h5>
 
-        <form onSubmit={Register}>
+        <form onSubmit={register}>
           <div className="w-96 mx-auto mt-10">
             <Input
               type="text"
@@ -60,8 +68,8 @@ const Regist = () => {
               variant="bordered"
               placeholder=""
               className="mb-3"
-              value={nama}
-              onChange={(e) => setNama(e.target.value)}
+              value={fullname}
+              onChange={(e) => setFullname(e.target.value)}
             />
             <Input
               type="text"
@@ -79,8 +87,8 @@ const Regist = () => {
               variant="bordered"
               placeholder=""
               className="mb-3"
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Input
@@ -88,11 +96,15 @@ const Regist = () => {
               label="Confirm Password"
               variant="bordered"
               placeholder=""
-              value={cpass}
-              onChange={(e) => setCpass(e.target.value)}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
 
-            <Button color="success" className="text-white w-full mt-10">
+            <Button
+              color="success"
+              type="submit"
+              className="text-white w-full mt-10"
+            >
               Create Account
             </Button>
 

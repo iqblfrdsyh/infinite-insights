@@ -1,4 +1,4 @@
 const userRoute = require("./userRoute");
+const blogRoute = require("./blogRoute");
 
-
-module.exports = {userRoute}
+module.exports = { userRoute, blogRoute };
