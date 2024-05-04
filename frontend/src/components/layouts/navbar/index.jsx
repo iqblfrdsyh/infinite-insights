@@ -152,13 +152,8 @@ const NavigationBar = () => {
           </NavbarMenuItem>
         </NavbarMenu>
       </Navbar>
-<<<<<<< HEAD
       <div className="w-full flex flex-wrap  justify-center pt-3 bg-white overflow-x-auto max-w-full">
         {variants.map((variant,index) => (
-=======
-      <div className="w-full flex flex-wrap gap-20 justify-center pt-3 bg-white overflow-x-auto max-w-full">
-        {variants.map((variant, index) => (
->>>>>>> 8d3a9c472fe337a6f83fa31a22c599abeda295b8
           <Tabs variant={variant} key={index}>
             {dataCategory.map((data) => (
               <Tab className="text-lg" key={data.category} title={data.category} />
