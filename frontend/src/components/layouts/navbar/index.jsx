@@ -19,12 +19,13 @@ import {
 import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
+import { dataCategory } from "@/data/category";
+
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const variants = ["underlined"];
-
+  const data = [dataCategory]
   const menuItems = ["Profile", "My Blog", "Log Out"];
 
   return (
@@ -130,24 +131,12 @@ const NavigationBar = () => {
           </NavbarMenuItem>
         </NavbarMenu>
       </Navbar>
-      <div className="w-full flex flex-wrap gap-20 justify-center pt-3 bg-white overflow-x-auto max-w-full">
+      <div className="w-full flex flex-wrap  justify-center pt-3 bg-white overflow-x-auto max-w-full">
         {variants.map((variant,index) => (
           <Tabs variant={variant} key={index}>
-            <Tab className="text-lg" key="sport" title="Sport" />
-            <Tab className="text-lg" key="music" title="Music" />
-            <Tab className="text-lg" key="artist" title="Artis" />
-            <Tab className="text-lg" key="photos0" title="Photos" />
-            <Tab className="text-lg" key="music0" title="Music" />
-            <Tab className="text-lg" key="videos0" title="Videos" />
-            <Tab className="text-lg" key="photos1" title="Photos" />
-            <Tab className="text-lg" key="music1" title="Music" />
-            <Tab className="text-lg" key="videos1" title="Videos" />
-            <Tab className="text-lg" key="photos2" title="Photos" />
-            <Tab className="text-lg" key="music2" title="Music" />
-            <Tab className="text-lg" key="videos2" title="Videos" />
-            <Tab className="text-lg" key="photos3" title="Photos" />
-            <Tab className="text-lg" key="music3" title="Music" />
-            <Tab className="text-lg" key="videos3" title="Videos" />
+            {dataCategory.map((data) => (
+              <Tab className="text-lg" key={data.category} title={data.category} />
+            ))}
           </Tabs>
         ))}
       </div>

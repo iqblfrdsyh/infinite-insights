@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { Input, Button, Link, Image } from "@nextui-org/react";
+import { Input, Button,Image } from "@nextui-org/react";
+import Link from "next/link";
 
 const Regist = () => {
     const [nama, setNama] = useState("");
@@ -15,10 +16,10 @@ const Regist = () => {
       e.preventDefault();
       try {
         await axios.post("http://localhost:8080/user/signup", {
-          nama: nama,
+          fullname: nama,
           username: username,
-          pass: pass,
-          cpass: pass,
+          password: pass,
+          confirmPassword: cpass,
         });
         router.push("/login");
       } catch (error) {
@@ -92,7 +93,7 @@ const Regist = () => {
               onChange={(e) => setCpass(e.target.value)}
             />
 
-            <Button color="success" className="text-white w-full mt-10">
+            <Button type="submit" color="success" className="text-white w-full mt-10">
               Create Account
             </Button>
 
