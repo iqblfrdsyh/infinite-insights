@@ -1,1 +1,1 @@
-npx sequelize-cli model:generate --name User --attributes fullname:string,username:string,headline:string,password:text,refreshToken:text
+npx sequelize-cli model:generate --name Blog --attributes title:string,content:text('long'),author:string,category:string,thumbnail:text,source_link:text,views:integer,status:string

@@ -1,27 +1,31 @@
 "use client";
+
 import React, { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import { Input, Button, Link, Image } from "@nextui-org/react";
+import { Input, Button, Image } from "@nextui-org/react";
+import Link from "next/link";
+import { signin } from "@/libs/api-libs";
 
 const Login = () => {
   const [username, setUsername] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
+
   const router = useRouter();
 
-  const Auth = async (e) => {
-    console.log("di klik")
-    // try {
-    //   await axios.post("http://localhost:8080/user/signin", {
-    //     username: username,
-    //     pass: pass,
-    //   });
-    //   router.push("/");
-    // } catch (error) {
-    //   if (error.response) {
-    //     console.log(error.response.data);
-    //   }
-    // }
+  const login = async (e) => {
+    e.preventDefault();
+    const data = {
+      username,
+      password,
+    };
+    try {
+      await signin("user/signin", data);
+      router.push("/");
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.msg);
+      }
+    }
   };
 
   return (
@@ -48,7 +52,7 @@ const Login = () => {
           Welcome, Login to access your account
         </h5>
 
-        <form onSubmit={Auth}>
+        <form onSubmit={login}>
           <div className="w-96 mx-auto mt-20">
             <Input
               type="text"
@@ -65,8 +69,8 @@ const Login = () => {
               label="Password"
               variant="bordered"
               placeholder=""
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Link href="#">
@@ -75,7 +79,11 @@ const Login = () => {
               </h6>
             </Link>
 
-            <Button color="success" className="text-white w-full mt-10">
+            <Button
+              type="submit"
+              color="success"
+              className="text-white w-full mt-10"
+            >
               Sign in
             </Button>
 

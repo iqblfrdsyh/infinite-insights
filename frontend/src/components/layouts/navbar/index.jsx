@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -83,28 +84,48 @@ const NavigationBar = () => {
             <Link href="#">Search</Link>
             <IoSearch className="text-[20px]" />
           </NavbarItem>
-          <Dropdown placement="bottom-end">
-            <DropdownTrigger>
-              <Button variant="bordered" className="border-[#69C06D]">
-                <Image
-                  src="/assets/images/person.png"
-                  alt="person"
-                  width={25}
-                  height={25}
-                />
-                <p className="text-inherit font-semibold text-black">Citra</p>
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">zoey@example.com</p>
-              </DropdownItem>
-              <DropdownItem key="logout" color="danger">
-                Log Out
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          {isLogin ? (
+            <Dropdown placement="bottom-end">
+              <DropdownTrigger>
+                <Button variant="bordered" className="border-[#69C06D]">
+                  <Image
+                    src="/assets/images/person.png"
+                    alt="person"
+                    width={25}
+                    height={25}
+                  />
+                  <p className="text-inherit font-semibold text-black">
+                    {decoded.username}
+                  </p>
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Profile Actions" variant="flat">
+                <DropdownItem key="profile" className="h-14 gap-2">
+                  <p className="font-semibold">Signed in as</p>
+                  <p className="font-semibold">zoey@example.com</p>
+                </DropdownItem>
+                <DropdownItem key="logout" color="default">
+                  Profile
+                </DropdownItem>
+                <DropdownItem key="logout" color="default">
+                  My Blog
+                </DropdownItem>
+                <DropdownItem key="logout" color="danger" onClick={Logout}>
+                  Log Out
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          ) : (
+            <Button variant="bordered" className="border-[#69C06D]">
+              <Image
+                src="/assets/images/person.png"
+                alt="person"
+                width={25}
+                height={25}
+              />
+              <p className="text-inherit font-semibold text-black">Guest</p>
+            </Button>
+          )}
         </NavbarContent>
 
         <NavbarMenu className="z-50">
@@ -131,8 +152,13 @@ const NavigationBar = () => {
           </NavbarMenuItem>
         </NavbarMenu>
       </Navbar>
+<<<<<<< HEAD
       <div className="w-full flex flex-wrap  justify-center pt-3 bg-white overflow-x-auto max-w-full">
         {variants.map((variant,index) => (
+=======
+      <div className="w-full flex flex-wrap gap-20 justify-center pt-3 bg-white overflow-x-auto max-w-full">
+        {variants.map((variant, index) => (
+>>>>>>> 8d3a9c472fe337a6f83fa31a22c599abeda295b8
           <Tabs variant={variant} key={index}>
             {dataCategory.map((data) => (
               <Tab className="text-lg" key={data.category} title={data.category} />
