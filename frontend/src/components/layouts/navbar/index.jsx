@@ -9,11 +9,6 @@ import {
   NavbarMenu,
   NavbarContent,
   NavbarItem,
-  Button,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
   Tabs,
   Tab,
 } from "@nextui-org/react";
@@ -23,6 +18,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { logout, refreshToken, updateToken } from "@/libs/api-libs";
 import { jwtDecode } from "jwt-decode";
+import DropdownUser from "@/components/dropdown";
+import BaseButton from "@/components/button";
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,9 +31,10 @@ const NavigationBar = () => {
   const getToken = async () => {
     try {
       const data = await refreshToken("token");
-      updateToken(data.accessToken);
+      localStorage.setItem("token", data.accessToken);
       const decoded = jwtDecode(data.accessToken);
       setDecoded(decoded);
+      localStorage.setItem("expire", decoded.exp);
       setIsLogin(true);
     } catch (error) {
       if (error.response) {
@@ -46,7 +44,7 @@ const NavigationBar = () => {
     }
   };
 
-  const Logout = async () => {
+  const handleLogout = async () => {
     try {
       await logout("user/logout");
       router.push("/login");
@@ -80,7 +78,6 @@ const NavigationBar = () => {
 
         <NavbarContent className="sm:hidden pr-3" justify="center">
           <NavbarBrand>
-            {/* <AcmeLogo /> */}
             <Image
               src="/assets/images/logo.png"
               alt="logo infinite"
@@ -119,38 +116,15 @@ const NavigationBar = () => {
             <IoSearch className="text-[20px]" />
           </NavbarItem>
           {isLogin ? (
-            <Dropdown placement="bottom-end">
-              <DropdownTrigger>
-                <Button variant="bordered" className="border-[#69C06D]">
-                  <Image
-                    src="/assets/images/person.png"
-                    alt="person"
-                    width={25}
-                    height={25}
-                  />
-                  <p className="text-inherit font-semibold text-black">
-                    {decoded.username}
-                  </p>
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-semibold">Signed in as</p>
-                  <p className="font-semibold">zoey@example.com</p>
-                </DropdownItem>
-                <DropdownItem key="logout" color="default">
-                  Profile
-                </DropdownItem>
-                <DropdownItem key="logout" color="default">
-                  My Blog
-                </DropdownItem>
-                <DropdownItem key="logout" color="danger" onClick={Logout}>
-                  Log Out
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+            <DropdownUser
+              imageSrc="/assets/images/person.png"
+              alt="person"
+              username={decoded.username}
+              fullname={decoded.fullname}
+              onclick={handleLogout}
+            />
           ) : (
-            <Button variant="bordered" className="border-[#69C06D]">
+            <BaseButton variant="bordered" className="border-[#69C06D]">
               <Image
                 src="/assets/images/person.png"
                 alt="person"
@@ -158,7 +132,7 @@ const NavigationBar = () => {
                 height={25}
               />
               <p className="text-inherit font-semibold text-black">Guest</p>
-            </Button>
+            </BaseButton>
           )}
         </NavbarContent>
 
