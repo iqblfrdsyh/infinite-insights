@@ -3,6 +3,8 @@ const { DataTypes } = require("sequelize");
 
 const User = require("../models/user.js")(sequelize, DataTypes);
 const Blog = require("../models/blog.js")(sequelize, DataTypes);
+const BlogViews = require("../models/blogviews.js")(sequelize, DataTypes);
+const Commentar = require("../models/commentar.js")(sequelize, DataTypes);
 
 User.hasMany(Blog, {
   foreignKey: "userId",
@@ -11,7 +13,35 @@ User.hasMany(Blog, {
 
 Blog.belongsTo(User, {
   foreignKey: "userId",
-  as: "blogs",
+  as: "users",
 });
 
-module.exports = { User, Blog };
+Blog.hasMany(BlogViews, {
+  foreignKey: "blogId",
+});
+
+BlogViews.belongsTo(Blog, {
+  foreignKey: "blogId",
+});
+
+Blog.hasMany(Commentar, {
+  foreignKey: "blogId",
+  as: "comments", 
+});
+
+Commentar.belongsTo(Blog, {
+  foreignKey: "blogId",
+  as: "blog",
+});
+
+User.hasMany(Commentar, {
+  foreignKey: "userId",
+  as: "comments", 
+});
+
+Commentar.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user", 
+});
+
+module.exports = { User, Blog, BlogViews, Commentar };
