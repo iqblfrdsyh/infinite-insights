@@ -1,4 +1,4 @@
-const { Blog, User, BlogViews } = require("../helper/relation");
+const { Blog, User, BlogViews, Commentar } = require("../helper/relation");
 const path = require("path");
 const crypto = require("crypto");
 
@@ -6,6 +6,11 @@ exports.getBlogs = async (req, res) => {
   try {
     const data = await Blog.findAll({
       attributes: { exclude: ["userId"] },
+      include: {
+        model: Commentar,
+        as: "comments",
+        attributes: ["id", "userId", "commentar"],
+      },
     });
     !data.length
       ? res.json({ msg: "Tidak ada data blog" })

@@ -3,7 +3,12 @@ const { Commentar, Blog, User } = require("../helper/relation");
 exports.getComments = async (req, res) => {
   try {
     const data = await Commentar.findAll({
-      include: { model: User, as: "user" },
+      include: {
+        model: User,
+        as: "user",
+        attributes: ["id", "fullname", "username"],
+      },
+      attributes: { exclude: ["userId"] },
     });
     !data.length
       ? res.json({ msg: "Tidak ada komentar" })
@@ -39,5 +44,26 @@ exports.createComment = async (req, res) => {
     res.status(201).json({ status: "Posted", newComment });
   } catch (error) {
     console.log(error);
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const commentId = req.query.commentId;
+    const userId = req.userId;
+
+    const comment = await Commentar.findOne({
+      where: { id: commentId, userId: userId },
+    });
+
+    if (!comment)
+      return res.status(404).json({ message: "Komentar tidak ditemukan" });
+
+    await comment.destroy();
+
+    return res.status(200).json({ message: "Komentar berhasil dihapus" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
   }
 };
