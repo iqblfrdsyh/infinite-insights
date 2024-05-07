@@ -124,14 +124,17 @@ const NavigationBar = () => {
               onclick={handleLogout}
             />
           ) : (
-            <BaseButton variant="bordered" className="border-[#69C06D]">
+            <BaseButton
+              variant="bordered"
+              className="border-[#69C06D] text-inherit font-semibold text-black"
+              title="Guest"
+            >
               <Image
                 src="/assets/images/person.png"
                 alt="person"
                 width={25}
                 height={25}
               />
-              <p className="text-inherit font-semibold text-black">Guest</p>
             </BaseButton>
           )}
         </NavbarContent>

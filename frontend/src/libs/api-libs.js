@@ -1,37 +1,37 @@
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const axiosJWT = axios.create();
+// const axiosJWT = axios.create();
 
-let token = localStorage.getItem("token") || "";
-let expired = parseInt(localStorage.getItem("expire")) || "";
+// let token = localStorage.getItem("token") || "";
+// let expired = parseInt(localStorage.getItem("expire")) || "";
 
-console.log({ token, expired });
+// console.log({ token, expired });
 
-axiosJWT.interceptors.request.use(
-  async (config) => {
-    const currentDate = new Date();
-    if (expired * 1000 < currentDate.getTime()) {
-      try {
-        const response = await axios.get(`${baseURL}/token`, {
-          withCredentials: true,
-        });
-        config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-        localStorage.setItem("token", response.data.accessToken);
-        const decoded = jwtDecode(response.data.accessToken);
-        localStorage.setItem("expire", decoded.exp);
-      } catch (error) {
-        console.error("Error refreshing token:", error);
-      }
-    }
-    return config;
-  },
-  (err) => {
-    return Promise.reject(err);
-  }
-);
+// axiosJWT.interceptors.request.use(
+//   async (config) => {
+//     const currentDate = new Date();
+//     if (expired * 1000 < currentDate.getTime()) {
+//       try {
+//         const response = await axios.get(`${baseURL}/token`, {
+//           withCredentials: true,
+//         });
+//         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+//         localStorage.setItem("token", response.data.accessToken);
+//         const decoded = jwtDecode(response.data.accessToken);
+//         localStorage.setItem("expire", decoded.exp);
+//       } catch (error) {
+//         console.error("Error refreshing token:", error);
+//       }
+//     }
+//     return config;
+//   },
+//   (err) => {
+//     return Promise.reject(err);
+//   }
+// );
 
 export const signup = async (endpoint, dataSignup) => {
   const response = await axios.post(`${baseURL}/${endpoint}`, dataSignup, {
@@ -64,4 +64,4 @@ export const refreshToken = async (endpoint) => {
   return response.data;
 };
 
-export default axiosJWT;
+// export default axiosJWT;
