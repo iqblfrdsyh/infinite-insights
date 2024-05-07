@@ -1,3 +1,3 @@
 template create model :
 
-npx sequelize-cli model:generate --name Commentar --attributes blogId:integer,userId:string,commentar:string
+npx sequelize-cli model:generate --name blogCategory --attributes blogId:integer,categoryId:integer
