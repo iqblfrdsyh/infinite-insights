@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${montserrat.className} h-[100vh]`}>
         <MyLayout>
-          <main>{children}</main>
+          <main className="mx-10">{children}</main>
         </MyLayout>
       </body>
     </html>

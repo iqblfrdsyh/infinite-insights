@@ -167,7 +167,7 @@ const NavigationBar = () => {
         </NavbarMenu>
       </Navbar>
       {pathname === "/profile" || pathname === "/myblog" ? null : (
-        <div className="w-full flex flex-wrap  justify-center pt-3 bg-white overflow-x-auto max-w-full">
+        <div className="w-full flex flex-wrap justify-center py-3 bg-white overflow-x-auto max-w-full">
           {variants.map(
             (
               variant,

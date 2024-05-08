@@ -29,13 +29,13 @@ const Home = () => {
       </div> */}
 
       {/* header */}
-      <div className="header flex w-[83rem] h-[90] mx-auto mt-10 rounded-xl bg-[#C2EADC] ps-24">
-        <div className="w-1/2 border-black">
-          <h1 className="text-6xl font-bold mt-32">Infinity Insight</h1>
+      <div className="header flex h-[90] mx-auto mt-6 rounded-xl bg-[#56a377] ps-[50px]">
+        <div className="w-1/2 text-white">
+          <h1 className="text-6xl font-bold mt-32">Infinite Insights</h1>
           <h6 className="ms-1 mt-2 text-lg">
             Expand Your Mind with Infinite Insights
           </h6>
-          <Button className="mt-5" color="success" variant="bordered">
+          <Button className="mt-5 text-white border-2" color="white" variant="bordered">
             Learn More
           </Button>
         </div>
@@ -51,7 +51,7 @@ const Home = () => {
       {/* end header */}
 
       {/* section 1 */}
-      <div className="w-[83rem] mt-20 h-[35rem] mb-20 p-4 flex items-center mx-auto ">
+      <div className="mt-20 h-[35rem] mb-20 pe-4 flex items-center mx-auto ">
         <div className="one w-2/3 relative">  
           <SwiperComponent />
         </div>
@@ -64,7 +64,7 @@ const Home = () => {
       {/* end section 1 */}
 
       {/* section 2 */}
-      <div className="w-[83rem] h-[35rem] mt-20 mx-auto bg-yellow-300">
+      <div className="h-[35rem] mt-20 mx-auto bg-yellow-300">
         <div className="flex w-full h-32 bg-green-500"></div>
         <div className=""></div>
       </div>
