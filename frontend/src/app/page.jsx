@@ -34,6 +34,7 @@ const Home = () => {
         ))}
       </div> */}
 
+      {/* header */}
       <div className="header flex w-[83rem] h-[90] mx-auto mt-10 rounded-xl bg-[#C2EADC] ps-24">
         <div className="w-1/2 border-black">
           <h1 className="text-6xl font-bold mt-32">Infinity Insight</h1>
@@ -53,7 +54,9 @@ const Home = () => {
           />
         </div>
       </div>
+      {/* end header */}
 
+      {/* section 1 */}
       <div className="w-[83rem] mt-20 h-[35rem] mb-20 p-4 flex mx-auto ">
         <div className="one bg-blue-400 w-2/3 relative">
           <Image
@@ -71,6 +74,14 @@ const Home = () => {
           ))}
         </div>
       </div>
+      {/* end section 1 */}
+
+      {/* section 2 */}
+      <div className="w-[83rem] h-[35rem] mt-20 mx-auto bg-yellow-300">
+        <div className="flex w-full h-32 bg-green-500"></div>
+        <div className=""></div>
+      </div>
+    {/* end section 2 */}
     </section>
   );
 };

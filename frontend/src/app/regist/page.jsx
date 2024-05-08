@@ -2,15 +2,10 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-<<<<<<< HEAD
-import { Input, Button,Image } from "@nextui-org/react";
-import Link from "next/link";
-=======
 import { Input, Button, Image } from "@nextui-org/react";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import { signup } from "@/libs/api-libs";
->>>>>>> 8d3a9c472fe337a6f83fa31a22c599abeda295b8
 
 const Regist = () => {
   const [fullname, setFullname] = useState("");
@@ -19,16 +14,6 @@ const Regist = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
-<<<<<<< HEAD
-    const Register = async(e) =>{
-      e.preventDefault();
-      try {
-        await axios.post("http://localhost:8080/user/signup", {
-          fullname: nama,
-          username: username,
-          password: pass,
-          confirmPassword: cpass,
-=======
   const register = async (e) => {
     e.preventDefault();
     try {
@@ -46,7 +31,6 @@ const Regist = () => {
           icon: "error",
           title: "Oops...",
           text: error.response.data.msg,
->>>>>>> 8d3a9c472fe337a6f83fa31a22c599abeda295b8
         });
       }
     }
@@ -116,15 +100,11 @@ const Regist = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
 
-<<<<<<< HEAD
-            <Button type="submit" color="success" className="text-white w-full mt-10">
-=======
             <Button
               color="success"
               type="submit"
               className="text-white w-full mt-10"
             >
->>>>>>> 8d3a9c472fe337a6f83fa31a22c599abeda295b8
               Create Account
             </Button>
 
