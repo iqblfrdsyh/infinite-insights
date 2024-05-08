@@ -6,16 +6,10 @@ import Link from "next/link";
 import { dataBlog } from "@/data/blog";
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
-import { updateToken } from "@/libs/api-libs";
-import { jwtDecode } from "jwt-decode";
-import { useRouter } from "next/navigation";
-import axios from "axios";
-import ArticleCard from "@/components/layouts/artikelCard";
+import ArticleCard from "@/components/artikelCard";
 import SwiperComponent from "@/components/swiper";
 
-
 const Home = () => {
-  const data = [dataBlog]
   const fourArticles = dataBlog.slice(0, 4);
 
   return (
@@ -57,16 +51,9 @@ const Home = () => {
       {/* end header */}
 
       {/* section 1 */}
-      <div className="w-[83rem] mt-20 h-[35rem] mb-20 p-4 flex mx-auto ">
-        <div className="one bg-blue-400 w-2/3 relative">
-          <Image
-            src="/assets/images/yes.jpg"
-            alt="Article Image"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            className="rounded-lg"
-          />
+      <div className="w-[83rem] mt-20 h-[35rem] mb-20 p-4 flex items-center mx-auto ">
+        <div className="one w-2/3 relative">  
+          <SwiperComponent />
         </div>
         <div className="two w-1/2">
           {fourArticles.map((article) => (
@@ -81,7 +68,7 @@ const Home = () => {
         <div className="flex w-full h-32 bg-green-500"></div>
         <div className=""></div>
       </div>
-    {/* end section 2 */}
+      {/* end section 2 */}
     </section>
   );
 };
