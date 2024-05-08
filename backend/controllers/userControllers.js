@@ -42,7 +42,7 @@ exports.userSignup = async (req, res) => {
       !trimmedValue(password) ||
       !trimmedValue(confirmPassword)
     ) {
-      return res.status(400).json({ msg: "Data tidak boleh kosong" });
+      return res.status(400).json({ msg: "Input tidak boleh kosong" });
     }
 
     if (password !== confirmPassword) {

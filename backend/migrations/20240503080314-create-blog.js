@@ -12,6 +12,9 @@ module.exports = {
       userId: {
         type: Sequelize.STRING,
       },
+      categoryId: {
+        type: Sequelize.INTEGER,
+      },
       title: {
         type: Sequelize.STRING,
       },
@@ -19,9 +22,6 @@ module.exports = {
         type: Sequelize.TEXT("long"),
       },
       author: {
-        type: Sequelize.STRING,
-      },
-      category: {
         type: Sequelize.STRING,
       },
       thumbnail: {

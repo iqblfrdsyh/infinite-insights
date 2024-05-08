@@ -4,11 +4,17 @@ const {
   getBlogs,
   createBlog,
   getBlogById,
+  updateBlog,
+  deleteBlog,
+  getBlogByCategory,
 } = require("../controllers/blogControllers");
 const { verifyToken } = require("../middleware/verifyToken");
 
 router.get("/blogs", getBlogs);
-router.get("/blog/:blogId", verifyToken, getBlogById);
+router.get("/blog", verifyToken, getBlogById);
+router.get("/blogs/category", getBlogByCategory);
 router.post("/blog/create", verifyToken, createBlog);
+router.put("/blog/update", updateBlog);
+router.delete("/blog/delete", deleteBlog);
 
 module.exports = router;

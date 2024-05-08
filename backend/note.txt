@@ -1,1 +1,3 @@
-npx sequelize-cli model:generate --name Blog --attributes title:string,content:text('long'),author:string,category:string,thumbnail:text,source_link:text,views:integer,status:string
+template create model :
+
+npx sequelize-cli model:generate --name blogCategory --attributes blogId:integer,categoryId:integer
