@@ -66,6 +66,7 @@ exports.userSignup = async (req, res) => {
       id: userID,
       fullname,
       username,
+      role: "Member",
       headline: headline || "",
       password: hashedPassword,
     });
