@@ -22,7 +22,7 @@ const DropdownUser = ({ username, fullname, imageSrc, alt, onclick }) => {
           <p className="font-semibold">Signed in as</p>
           <p className="font-semibold">{fullname}</p>
         </DropdownItem>
-        <DropdownItem key="profile" color="default">
+        <DropdownItem key="profile" color="default" href="/profile">
           Profile
         </DropdownItem>
         <DropdownItem key="myblog" color="default">

@@ -16,7 +16,8 @@ import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { logout, refreshToken, updateToken } from "@/libs/api-libs";
+import { usePathname } from "next/navigation";
+import { logout, refreshToken } from "@/libs/api-libs";
 import { jwtDecode } from "jwt-decode";
 import DropdownUser from "@/components/dropdown";
 import BaseButton from "@/components/button";
@@ -27,6 +28,7 @@ const NavigationBar = () => {
   const [decoded, setDecoded] = useState();
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const getToken = async () => {
     try {
@@ -68,7 +70,7 @@ const NavigationBar = () => {
         isBlurred={false}
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
-        className="px-[25px]"
+        className="sm:px-[25px]"
       >
         <NavbarContent className="sm:hidden" justify="start">
           <NavbarMenuToggle
@@ -111,6 +113,9 @@ const NavigationBar = () => {
         </NavbarContent>
 
         <NavbarContent as="div" justify="end">
+          <NavbarItem  className="hidden sm:flex items-center gap-1 cursor-pointer ">
+            <Link href="/">Home</Link>
+          </NavbarItem>
           <NavbarItem className="hidden sm:flex items-center gap-1 cursor-pointer ">
             <Link href="#">Search</Link>
             <IoSearch className="text-[20px]" />
@@ -163,27 +168,29 @@ const NavigationBar = () => {
           </NavbarMenuItem>
         </NavbarMenu>
       </Navbar>
-      <div className="w-full flex flex-wrap gap-20 justify-center pt-3 bg-white overflow-x-auto max-w-full">
-        {variants.map((variant, index) => (
-          <Tabs variant={variant} key={index}>
-            <Tab className="text-lg" key="sport" title="Sport" />
-            <Tab className="text-lg" key="music" title="Music" />
-            <Tab className="text-lg" key="artist" title="Artis" />
-            <Tab className="text-lg" key="photos0" title="Photos" />
-            <Tab className="text-lg" key="music0" title="Music" />
-            <Tab className="text-lg" key="videos0" title="Videos" />
-            <Tab className="text-lg" key="photos1" title="Photos" />
-            <Tab className="text-lg" key="music1" title="Music" />
-            <Tab className="text-lg" key="videos1" title="Videos" />
-            <Tab className="text-lg" key="photos2" title="Photos" />
-            <Tab className="text-lg" key="music2" title="Music" />
-            <Tab className="text-lg" key="videos2" title="Videos" />
-            <Tab className="text-lg" key="photos3" title="Photos" />
-            <Tab className="text-lg" key="music3" title="Music" />
-            <Tab className="text-lg" key="videos3" title="Videos" />
-          </Tabs>
-        ))}
-      </div>
+      {pathname === "/profile" ? null : (
+        <div className="w-full flex flex-wrap gap-20 justify-center pt-3 bg-white overflow-x-auto max-w-full">
+          {variants.map((variant, index) => (
+            <Tabs variant={variant} key={index}>
+              <Tab className="text-lg" key="sport" title="Sport" />
+              <Tab className="text-lg" key="music" title="Music" />
+              <Tab className="text-lg" key="artist" title="Artis" />
+              <Tab className="text-lg" key="photos0" title="Photos" />
+              <Tab className="text-lg" key="music0" title="Music" />
+              <Tab className="text-lg" key="videos0" title="Videos" />
+              <Tab className="text-lg" key="photos1" title="Photos" />
+              <Tab className="text-lg" key="music1" title="Music" />
+              <Tab className="text-lg" key="videos1" title="Videos" />
+              <Tab className="text-lg" key="photos2" title="Photos" />
+              <Tab className="text-lg" key="music2" title="Music" />
+              <Tab className="text-lg" key="videos2" title="Videos" />
+              <Tab className="text-lg" key="photos3" title="Photos" />
+              <Tab className="text-lg" key="music3" title="Music" />
+              <Tab className="text-lg" key="videos3" title="Videos" />
+            </Tabs>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
