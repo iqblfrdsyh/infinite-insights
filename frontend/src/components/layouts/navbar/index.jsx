@@ -1,6 +1,6 @@
-"use client";
+"use client"; // gtw pastinya buat apa, tapi kalo ga dikasih ntr error
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; //USE EFFECT BIAR GA NGAMBIL MULU 
 import {
   Navbar,
   NavbarBrand,
@@ -9,25 +9,57 @@ import {
   NavbarMenu,
   NavbarContent,
   NavbarItem,
-  Button,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
   Tabs,
   Tab,
 } from "@nextui-org/react";
 import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation"; // INI BUAT REDIRECT KE PAGE LAIN
+import { logout, refreshToken, updateToken } from "@/libs/api-libs"; // NGAMBIL DI LIBRARY API
+import { jwtDecode } from "jwt-decode"; // BUAT DEKODE IN TOKEN
 import { dataCategory } from "@/data/category";
-
+import DropdownUser from "@/components/dropdown";
+import BaseButton from "@/components/button";
 
 const NavigationBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // INI BUAT NGE OPEN MENU, TAMPILAN AWAL FALSE JDI GA LGSNG KEBUKA
+  const [isLogin, setIsLogin] = useState(false);
+  const [decoded, setDecoded] = useState(); // NYIMPEN INFORMASI TOKEN PENGGUNA PAS LOGIN
+  const router = useRouter(); // ANUIN ROUTER
+  
   const variants = ["underlined"];
-  const data = [dataCategory]
   const menuItems = ["Profile", "My Blog", "Log Out"];
+
+  const getToken = async () => { // FUNGSI BIAR DPT TOKEN
+    try {
+      const data = await refreshToken("token"); // DAPETIN TOKEN TERBARU
+      localStorage.setItem("token", data.accessToken); //DI SIMPEN DI LOCAL STORAGE
+      const decoded = jwtDecode(data.accessToken); // NGE DEKODE TOKEN AKSES TADI
+      setDecoded(decoded); // BARU DISIMPEN KESINI
+      localStorage.setItem("expire", decoded.exp); // TERUS GA LUPA DIPASANG MASA KADALUWARSANYA
+      setIsLogin(true); // KALO UDAH YAUDAH BERARTI UDH LOGIN
+    } catch (error) {
+      if (error.response) {
+        setIsLogin(false); // KALO DIA GAGAL DIA BAKAL NGESET LOGINNYA GAGAL DN DIARAHIN KE PAGE LOGIN BUAT ULANG
+        router.push("/login");
+      }
+    }
+  };
+
+  const handleLogout = async () => { // NI FUNCTION BUAT NGEHANDLE LOGOUT
+    try {
+      await logout("user/logout"); // DIA BAKAL LOGOUT AKUNNYA TRS LANGSUNG DIARAHIN KE HALAMAN LOGIN
+      router.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getToken(); // NI BUAT AMBIL TOKEN, PAKE USEEFFECT JDINYA AMBILNYA CUMA SEKALI
+  }, [isLogin]);
+
 
   return (
     <div className="sticky top-0 z-50">
@@ -46,7 +78,6 @@ const NavigationBar = () => {
 
         <NavbarContent className="sm:hidden pr-3" justify="center">
           <NavbarBrand>
-            {/* <AcmeLogo /> */}
             <Image
               src="/assets/images/logo.png"
               alt="logo infinite"
@@ -85,38 +116,15 @@ const NavigationBar = () => {
             <IoSearch className="text-[20px]" />
           </NavbarItem>
           {isLogin ? (
-            <Dropdown placement="bottom-end">
-              <DropdownTrigger>
-                <Button variant="bordered" className="border-[#69C06D]">
-                  <Image
-                    src="/assets/images/person.png"
-                    alt="person"
-                    width={25}
-                    height={25}
-                  />
-                  <p className="text-inherit font-semibold text-black">
-                    {decoded.username}
-                  </p>
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-semibold">Signed in as</p>
-                  <p className="font-semibold">zoey@example.com</p>
-                </DropdownItem>
-                <DropdownItem key="logout" color="default">
-                  Profile
-                </DropdownItem>
-                <DropdownItem key="logout" color="default">
-                  My Blog
-                </DropdownItem>
-                <DropdownItem key="logout" color="danger" onClick={Logout}>
-                  Log Out
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+            <DropdownUser
+              imageSrc="/assets/images/person.png"
+              alt="person"
+              username={decoded.username}
+              fullname={decoded.fullname}
+              onclick={handleLogout}
+            />
           ) : (
-            <Button variant="bordered" className="border-[#69C06D]">
+            <BaseButton variant="bordered" className="border-[#69C06D]">
               <Image
                 src="/assets/images/person.png"
                 alt="person"
@@ -124,7 +132,7 @@ const NavigationBar = () => {
                 height={25}
               />
               <p className="text-inherit font-semibold text-black">Guest</p>
-            </Button>
+            </BaseButton>
           )}
         </NavbarContent>
 
@@ -153,10 +161,12 @@ const NavigationBar = () => {
         </NavbarMenu>
       </Navbar>
       <div className="w-full flex flex-wrap  justify-center pt-3 bg-white overflow-x-auto max-w-full">
-        {variants.map((variant,index) => (
-          <Tabs variant={variant} key={index}>
-            {dataCategory.map((data) => (
-              <Tab className="text-lg" key={data.category} title={data.category} />
+        {variants.map((variant,index) => ( // DIA NGE MAPPING ARRAY VARIANT DENGAN NGEBUAT PARAMETER VARIANT
+        // TERUS DIA NGE SET ISI VARIANT TADI KE SINI BIAR VARIANT TAB NYA BISA KE UNDERLINED
+          <Tabs variant={variant} key={index}> 
+            {dataCategory.map((data) => ( // ABIS ITU DIA NGE MAPPING YANG DATA DUMMY CATEGORY DENGAN PARAM DATA
+              <Tab className="text-lg" key={data.category} title={data.category} /> 
+              // TERUS DIA MAU AMBIL DATA DARI DATA CATEGORY TAPI NGEPASIN PROPERTYNYA
             ))}
           </Tabs>
         ))}

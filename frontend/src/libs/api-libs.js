@@ -5,22 +5,10 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const axiosJWT = axios.create();
 
-let expired = "";
-let setExpired = (newExpired) => {
-  expired = newExpired;
-};
+let token = localStorage.getItem("token") || "";
+let expired = parseInt(localStorage.getItem("expire")) || "";
 
-let token = "";
-
-export const updateToken = (newToken) => {
-  setToken(newToken);
-};
-
-let setToken = (newToken) => {
-  token = newToken;
-};
-
-console.log({ token });
+console.log({ token, expired });
 
 axiosJWT.interceptors.request.use(
   async (config) => {
@@ -31,9 +19,9 @@ axiosJWT.interceptors.request.use(
           withCredentials: true,
         });
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-        setToken(response.data.accessToken);
+        localStorage.setItem("token", response.data.accessToken);
         const decoded = jwtDecode(response.data.accessToken);
-        setExpired(decoded.exp);
+        localStorage.setItem("expire", decoded.exp);
       } catch (error) {
         console.error("Error refreshing token:", error);
       }

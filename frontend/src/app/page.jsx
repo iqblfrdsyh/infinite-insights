@@ -10,9 +10,13 @@ import { updateToken } from "@/libs/api-libs";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import ArticleCard from "@/components/layouts/artikelCard";
+import SwiperComponent from "@/components/swiper";
+
 
 const Home = () => {
   const data = [dataBlog]
+  const fourArticles = dataBlog.slice(0, 4);
 
   return (
     <section>
@@ -50,32 +54,22 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="w-[83rem] mt-20 h-[35rem] mb-20 p-4 flex mx-auto bg-green-400">
-        <div className="one">
-          {dataBlog.map(
-            (data) =>
-              data.id === 1 && (
-                <div className="relative w-full h-full">
-                  <Image
-                    width={500}
-                    height={200}
-                    className=" w-[50rem] object-cover rounded-lg"
-                    alt="NextUI Fruit Image with Zoom"
-                    src={data.image}
-                  />
-                  <div className=" w-[50rem] h-40 absolute bottom-0 content-center ps-5">
-                    <h4 className="text-white font-medium text-lg">
-                      {data.time}
-                    </h4>
-                    <h1 className="text-white font-bold text-4xl">
-                      {data.title}
-                    </h1>
-                  </div>
-                </div>
-              )
-          )}
+      <div className="w-[83rem] mt-20 h-[35rem] mb-20 p-4 flex mx-auto ">
+        <div className="one bg-blue-400 w-2/3 relative">
+          <Image
+            src="/assets/images/yes.jpg"
+            alt="Article Image"
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center"
+            className="rounded-lg"
+          />
         </div>
-        <div className="two"></div>
+        <div className="two w-1/2">
+          {fourArticles.map((article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
+        </div>
       </div>
     </section>
   );

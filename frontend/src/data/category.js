@@ -1,46 +1,50 @@
 const dataCategory = [
   {
     id: 1,
-    category: "Sports",
+    category: "Home",
   },
   {
     id: 2,
-    category: "Programming",
+    category: "Sports",
   },
   {
     id: 3,
-    category: "Bussines",
+    category: "Programming",
   },
   {
     id: 4,
-    category: "Tech",
+    category: "Bussines",
   },
   {
     id: 5,
-    category: "Life",
+    category: "Tech",
   },
   {
     id: 6,
-    category: "Healty",
+    category: "Life",
   },
   {
     id: 7,
-    category: "Film",
+    category: "Healty",
   },
   {
     id: 8,
-    category: "Politic",
+    category: "Film",
   },
   {
     id: 9,
-    category: "News Hot",
+    category: "Politic",
   },
   {
     id: 10,
-    category: "Artist",
+    category: "News Hot",
   },
   {
     id: 11,
+    category: "Artist",
+  },
+  {
+    id: 12,
     category: "Hype",
   },
 ];
