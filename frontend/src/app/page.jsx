@@ -41,7 +41,6 @@ const Home = () => {
         </div>
         <div className="w-1/2 h-full pt-16 ">
           <Image
-            className=""
             width={600}
             height={100}
             src="/assets/images/header.png"

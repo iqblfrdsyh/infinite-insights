@@ -62,7 +62,7 @@ const NavigationBar = () => {
   }, [isLogin]);
 
   return (
-    <div className="sticky top-0 z-50">
+    <div className="sticky top-0 z-50 mx-auto mw:w-[1340px] sm:w-[100%]">
       <Navbar
         isBordered
         isBlurred={false}
