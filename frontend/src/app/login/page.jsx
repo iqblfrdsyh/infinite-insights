@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Input, Button, Image } from "@nextui-org/react";
 import Link from "next/link";
 import { signin } from "@/libs/api-libs";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -20,10 +21,21 @@ const Login = () => {
     };
     try {
       await signin("user/signin", data);
-      router.push("/");
+      Swal.fire({
+        icon: "success",
+        title: "Success Login",
+        text: "Welcome Back!",
+      }).then(() => {
+        router.push("/");
+      });
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.msg);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response.data.msg,
+        });
       }
     }
   };

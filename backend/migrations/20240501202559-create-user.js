@@ -17,6 +17,9 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
+      role: {
+        type: Sequelize.STRING,
+      },
       headline: {
         type: Sequelize.STRING,
       },
