@@ -55,8 +55,8 @@ const Profile = () => {
       </section>
       <hr className="border-2 border-gray-500 w-[65%] mx-auto my-16" />
       <section>
-        <h2 className="font-semibold text-[32px] mb-[32px] text-center">
-          My Blogs
+        <h2 className="font-semibold text-[32px] mb-[20px] text-center">
+          My <span className="text-green-700">Blogs</span>
         </h2>
         <div className="flex justify-end my-10">
           <BaseButton title="Create New Blog" color="primary" radius="sm" />

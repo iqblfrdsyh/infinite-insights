@@ -91,8 +91,7 @@ const Cards = {
             <BaseButton
               title="Edit Blog"
               radius="sm"
-              color="success"
-              className="font-medium"
+              className="font-medium bg-green-600 text-white"
             />
             <BaseButton
               title="Delete"
