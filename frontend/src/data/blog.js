@@ -5,7 +5,8 @@ const dataBlog = [
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
     image: "/assets/images/blog-images/programming.jpg",
-    time: "3 Hari yang lalu",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
     category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {
@@ -41,7 +42,8 @@ const dataBlog = [
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
     image: "/assets/images/blog-images/estetik.jpg",
-    time: "3 Hari yang lalu",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
     category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {
@@ -67,7 +69,8 @@ const dataBlog = [
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
     image: "/assets/images/blog-images/what.jpeg",
-    time: "3 Hari yang lalu",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
     category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {
@@ -93,7 +96,8 @@ const dataBlog = [
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
     image: "/assets/images/blog-images/programming.jpg",
-    time: "3 Hari yang lalu",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
     category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {
@@ -114,7 +118,8 @@ const dataBlog = [
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
     image: "/assets/images/blog-images/programming.jpg",
-    time: "3 Hari yang lalu",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
     category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {

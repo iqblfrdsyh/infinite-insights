@@ -9,12 +9,13 @@ import Image from "next/image";
 import { Button } from "@nextui-org/react";
 import ArticleCard from "@/components/artikelCard";
 import SwiperComponent from "@/components/swiper";
+import CardArtikel from "@/components/cardArtikel";
 
 const Home = () => {
   const fourArticles = dataBlog.slice(0, 4);
 
   return (
-    <section>
+    <section className="">
       {/* <h2 className="text-[30px] text-center my-5">Infinite Insights</h2>
       <div className="flex gap-4 flex-wrap justify-center">
         {dataBlog.map((blog) => (
@@ -36,23 +37,23 @@ const Home = () => {
           <h6 className="ms-1 mt-2 text-lg">
             Expand Your Mind with Infinite Insights
           </h6>
-          <Button className="mt-5 text-white border-2" color="white" variant="bordered">
+          <Button
+            className="mt-5 text-white border-2"
+            color="white"
+            variant="bordered"
+          >
             Learn More
           </Button>
         </div>
         <div className="w-1/2 h-full pt-16 ">
-          <Image
-            width={600}
-            height={100}
-            src="/assets/images/header.png"
-          />
+          <Image width={600} height={100} src="/assets/images/header.png" />
         </div>
       </div>
       {/* end header */}
 
       {/* section 1 */}
       <div className="mt-20 h-[35rem] mb-20 pe-4 flex items-center mx-auto ">
-        <div className="one w-2/3 relative">  
+        <div className="one w-2/3 relative">
           <SwiperComponent />
         </div>
         <div className="two w-1/2">
@@ -64,8 +65,8 @@ const Home = () => {
       {/* end section 1 */}
 
       {/* section 2 */}
-      <div className="w-[83rem] h-[35rem] flex mt-20 mx-auto ">
-        <div className="flex w-3/4 h-full ">
+      <div className="w-[83rem] h-[35rem] flex mt-20 mx-auto  ">
+        <div className="w-3/4 h-full ">
           <div className="w-full h-20 ">
             <div className="flex w-full justify-between">
               <h1 className="text-4xl h-14 border-b-5 border-gray-500 font-extrabold">
@@ -84,6 +85,11 @@ const Home = () => {
                 border: "none",
               }}
             />
+          </div>
+          <div className="flex flex-wrap-reverse justify-between items-center">
+            {fourArticles.map((article) => (
+              <CardArtikel key={article.id} article={article} />
+            ))}
           </div>
         </div>
         <div className="w-1/3 h-full ">

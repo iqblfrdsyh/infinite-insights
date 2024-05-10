@@ -5,14 +5,14 @@ import { Navigation, Pagination, Autoplay, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
-import { dataBanner } from "@/data/banner";
+import { dataBlog } from "@/data/blog";
 import { formatDate } from "@/libs/formatDate";
 
 const SwiperComponent = () => {
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay, A11y]}
-      spaceBetween={50}
+      spaceBetween={0}
       slidesPerView={1}
       delay={2000}
       autoplay={true}
@@ -20,12 +20,13 @@ const SwiperComponent = () => {
       onSlideChange={() => console.log("slide change")}
       className="rounded-lg"
     >
-      {dataBanner.map((data) => (
+      {dataBlog.map((data) => (
         <SwiperSlide key={data.id}>
           <ContentSwiper
-            thumbnail={data.thumbnail}
+            thumbnail={data.image}
             time={formatDate(data.time)}
             title={data.title}
+            
           />
         </SwiperSlide>
       ))}
