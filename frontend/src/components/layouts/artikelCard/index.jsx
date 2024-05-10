@@ -10,10 +10,8 @@ const ArticleCard = ({ article }) => {
           <Image
             src={article.image}
             alt="Article Image"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            className='rounded-lg'
+            fill={true}
+            className='rounded-lg object-cover'
             />
         </div>
         <div className="w-2/3 ml-4">

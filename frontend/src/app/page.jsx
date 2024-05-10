@@ -1,5 +1,6 @@
 "use client";
 
+import { IoChevronForwardOutline } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
 import BaseButton from "@/components/button";
 import Link from "next/link";
@@ -62,10 +63,8 @@ const Home = () => {
           <Image
             src="/assets/images/yes.jpg"
             alt="Article Image"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            className="rounded-lg"
+            fill={true}
+            className="rounded-lg object-cover"
           />
         </div>
         <div className="two w-1/2">
@@ -77,11 +76,46 @@ const Home = () => {
       {/* end section 1 */}
 
       {/* section 2 */}
-      <div className="w-[83rem] h-[35rem] mt-20 mx-auto bg-yellow-300">
-        <div className="flex w-full h-32 bg-green-500"></div>
-        <div className=""></div>
+      <div className="w-[83rem] h-[35rem] flex mt-20 mx-auto ">
+        <div className="flex w-3/4 h-full ">
+          <div className="w-full h-20 ">
+            <div className="flex w-full justify-between">
+              <h1 className="text-4xl h-14 border-b-5 border-gray-500 font-extrabold">
+                Recomendation
+              </h1>
+              <Link href="#" className="hover:underline">
+                <h2 className="font-medium text-lg flex mt-4 ">
+                  Selengkapnya <IoChevronForwardOutline className="mt-1.5" />
+                </h2>
+              </Link>
+            </div>
+            <hr
+              style={{
+                backgroundColor: "#E5E7EB",
+                height: "3px",
+                border: "none",
+              }}
+            />
+          </div>
+        </div>
+        <div className="w-1/3 h-full ">
+          <div className="w-full h-20 ms-10 ">
+            <div className="flex w-full">
+              <h1 className="text-4xl h-14 border-b-5 border-gray-500 font-extrabold">
+                Popular
+              </h1>
+            </div>
+            <hr
+              style={{
+                backgroundColor: "#E5E7EB",
+                height: "3px",
+                border: "none",
+              }}
+            />
+          </div>
+        </div>
       </div>
-    {/* end section 2 */}
+      {/* end section 2 */}
     </section>
   );
 };
