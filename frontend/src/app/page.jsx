@@ -49,7 +49,7 @@ const Home = () => {
       {/* end section 1 */}
 
       {/* section 2 */}
-      <div className="h-[35rem] flex mt-20 gap-7">
+      <div className="flex mt-20 gap-7">
         <div className="w-[65%] backdrop:h-full ">
           <div className="w-full h-20 ">
             <div className="flex w-full justify-between">
