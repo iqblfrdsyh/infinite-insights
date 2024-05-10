@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${montserrat.className} h-[100vh]`}>
         <MyLayout>
-          <main className="mx-auto px-5 sm:px-10 mw:w-[1340px] sm:w-[100%]">{children}</main>
+          <main>{children}</main>
         </MyLayout>
       </body>
     </html>

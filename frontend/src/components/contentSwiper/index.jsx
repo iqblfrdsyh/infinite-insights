@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Image } from "@nextui-org/react";
 import React from "react";
 
 const ContentSwiper = ({ thumbnail, time, title }) => {
@@ -13,16 +13,14 @@ const ContentSwiper = ({ thumbnail, time, title }) => {
   };
 
   return (
-    <div className="relative h-[510px] w-full">
+    <div className="relative">
       <div style={gradient} className="rounded-b-lg"></div>
-      <div className="relative h-full">
+      <div className="">
         <Image
           src={thumbnail}
-          fill={true}
           alt="Article Image"
-          className="rounded-lg"
+          className="rounded-lg object-cover h-[510px] w-[855px] -z-20"
           loading="lazy"
-          style={{ objectFit: "cover" }}
         />
         <div className="absolute bottom-8 left-8 right-32 text-white z-50">
           <p className="opacity-80 mb-3">{time}</p>

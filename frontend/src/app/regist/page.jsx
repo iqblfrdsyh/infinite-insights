@@ -41,12 +41,12 @@ const Regist = () => {
       <div className="relative bg-white w-1/2 border-e-2 pe-10">
         <Image
           src="/assets/images/pentol.png"
-          className="object-cover w-full h-full"
+          className="object-cover w-screen h-screen flex justify-center items-center"
           alt="Gambar latar belakang"
         />
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
+        <div className="absolute top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-20">
           <div className="text-center flex">
-            <Image src="/assets/images/logo.png" className="me-2" />
+            <Image src="/assets/images/logo.png" className="me-3" />
             <h2 className="text-6xl font-nunito font-semibold">Insight</h2>
           </div>
           <div className="text-center mt-2">
@@ -82,7 +82,7 @@ const Regist = () => {
             />
 
             <Input
-              type="text"
+              type="password"
               label="Password"
               variant="bordered"
               placeholder=""
@@ -92,7 +92,7 @@ const Regist = () => {
             />
 
             <Input
-              type="text"
+              type="password"
               label="Confirm Password"
               variant="bordered"
               placeholder=""

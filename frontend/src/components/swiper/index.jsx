@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import { dataBlog } from "@/data/blog";
-import { formatDate } from "@/libs/formatDate";
+import { formatDate } from "@/libs/functions";
 
 const SwiperComponent = () => {
   return (
@@ -16,8 +16,6 @@ const SwiperComponent = () => {
       slidesPerView={1}
       delay={2000}
       autoplay={true}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
       className="rounded-lg"
     >
       {dataBlog.map((data) => (
@@ -26,7 +24,6 @@ const SwiperComponent = () => {
             thumbnail={data.image}
             time={formatDate(data.time)}
             title={data.title}
-            
           />
         </SwiperSlide>
       ))}

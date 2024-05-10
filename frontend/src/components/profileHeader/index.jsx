@@ -13,13 +13,19 @@ const ProfileHeader = () => {
           style={{ objectFit: "cover", filter: "brightness(40%)" }}
           className="rounded-lg"
         />
-        <Avatar
-          src="/assets/images/user.png"
-          alt="user"
-          isBordered
-          color="default"
-          className="absolute bottom-[-50px] left-10 h-[150px] w-[150px] bg-white p-5 shadow-lg"
-        />
+        <div className="flex gap-5 absolute bottom-[-50px] left-10 text-white">
+          <Avatar
+            src="/assets/images/user.png"
+            alt="user"
+            isBordered
+            color="default"
+            className=" h-[150px] w-[150px] bg-white p-5 shadow-lg"
+          />
+          <div className="flex flex-col py-[17px]">
+            <p className="text-green-400 font-semibold opacity-90">Member</p>
+            <h3 className="text-[35px] font-semibold">M Iqbal Ferdiansyah</h3>
+          </div>
+        </div>
       </div>
     </div>
   );

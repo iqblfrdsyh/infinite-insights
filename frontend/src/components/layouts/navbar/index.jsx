@@ -1,6 +1,6 @@
-"use client"; // gtw pastinya buat apa, tapi kalo ga dikasih ntr error
+"use client";
 
-import React, { useEffect, useState } from "react"; //USE EFFECT BIAR GA NGAMBIL MULU
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -11,46 +11,45 @@ import {
   NavbarItem,
   Tabs,
   Tab,
+  ScrollShadow,
 } from "@nextui-org/react";
 import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation"; // INI BUAT REDIRECT KE PAGE LAIN
-import { logout, refreshToken } from "@/libs/api-libs"; // NGAMBIL DI LIBRARY API
-import { jwtDecode } from "jwt-decode"; // BUAT DEKODE IN TOKEN
+import { usePathname, useRouter } from "next/navigation";
+import { logout, refreshToken } from "@/libs/api-libs";
+import { jwtDecode } from "jwt-decode";
 import { dataCategory } from "@/data/category";
 import DropdownUser from "@/components/dropdown";
 import BaseButton from "@/components/button";
 
 const NavigationBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // INI BUAT NGE OPEN MENU, TAMPILAN AWAL FALSE JDI GA LGSNG KEBUKA
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [decoded, setDecoded] = useState(); // NYIMPEN INFORMASI TOKEN PENGGUNA PAS LOGIN
-  const router = useRouter(); // ANUIN ROUTER
-  const pathname = usePathname(); // ANUIN ROUTER
+  const [decoded, setDecoded] = useState();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const variants = ["underlined"];
   const menuItems = ["Profile", "My Blog", "Log Out"];
 
   const getToken = async () => {
-    // FUNGSI BIAR DPT TOKEN
     try {
-      const data = await refreshToken("token"); // DAPETIN TOKEN TERBARU
-      const decoded = jwtDecode(data.accessToken); // NGE DEKODE TOKEN AKSES TADI
-      setDecoded(decoded); // BARU DISIMPEN KESINI
-      setIsLogin(true); // KALO UDAH YAUDAH BERARTI UDH LOGIN
+      const data = await refreshToken("token");
+      const decoded = jwtDecode(data.accessToken);
+      setDecoded(decoded);
+      setIsLogin(true);
     } catch (error) {
       if (error.response) {
-        setIsLogin(false); // KALO DIA GAGAL DIA BAKAL NGESET LOGINNYA GAGAL DN DIARAHIN KE PAGE LOGIN BUAT ULANG
+        setIsLogin(false);
         router.push("/login");
       }
     }
   };
 
   const handleLogout = async () => {
-    // NI FUNCTION BUAT NGEHANDLE LOGOUT
     try {
-      await logout("user/logout"); // DIA BAKAL LOGOUT AKUNNYA TRS LANGSUNG DIARAHIN KE HALAMAN LOGIN
+      await logout("user/logout");
       router.push("/login");
     } catch (error) {
       console.log(error);
@@ -58,11 +57,11 @@ const NavigationBar = () => {
   };
 
   useEffect(() => {
-    getToken(); // NI BUAT AMBIL TOKEN, PAKE USEEFFECT JDINYA AMBILNYA CUMA SEKALI
+    getToken();
   }, [isLogin]);
 
   return (
-    <div className="sticky top-0 z-50 mx-auto mw:w-[1340px] sm:w-[100%]">
+    <div className="sticky top-0 z-50">
       <Navbar
         isBordered
         isBlurred={false}
@@ -167,30 +166,24 @@ const NavigationBar = () => {
         </NavbarMenu>
       </Navbar>
       {pathname === "/profile" || pathname === "/myblog" ? null : (
-        <div className="w-full flex flex-wrap justify-center py-3 bg-white overflow-x-auto max-w-full">
-          {variants.map(
-            (
-              variant,
-              index // DIA NGE MAPPING ARRAY VARIANT DENGAN NGEBUAT PARAMETER VARIANT
-            ) => (
-              // TERUS DIA NGE SET ISI VARIANT TADI KE SINI BIAR VARIANT TAB NYA BISA KE UNDERLINED
-              <Tabs variant={variant} key={index}>
-                {dataCategory.map(
-                  (
-                    data // ABIS ITU DIA NGE MAPPING YANG DATA DUMMY CATEGORY DENGAN PARAM DATA
-                  ) => (
-                    <Tab
-                      className="text-lg"
-                      key={data.category}
-                      title={data.category}
-                    />
-                    // TERUS DIA MAU AMBIL DATA DARI DATA CATEGORY TAPI NGEPASIN PROPERTYNYA
-                  )
-                )}
-              </Tabs>
-            )
-          )}
-        </div>
+        <ScrollShadow
+          size={30}
+          orientation="horizontal"
+          hideScrollBar
+          className="w-full flex flex-wrap justify-center py-3 bg-white  max-w-full"
+        >
+          {variants.map((variant, index) => (
+            <Tabs variant={variant} key={index}>
+              {dataCategory.map((data) => (
+                <Tab
+                  className="text-lg"
+                  key={data.category}
+                  title={data.category}
+                />
+              ))}
+            </Tabs>
+          ))}
+        </ScrollShadow>
       )}
     </div>
   );

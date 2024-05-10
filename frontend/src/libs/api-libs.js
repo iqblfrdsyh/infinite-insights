@@ -64,4 +64,14 @@ export const refreshToken = async (endpoint) => {
   return response.data;
 };
 
+export const getUser = async (endpoint,token) => {
+  const response = await axios.get(`${baseURL}/${endpoint}`, {
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
 // export default axiosJWT;

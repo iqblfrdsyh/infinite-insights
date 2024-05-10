@@ -1,35 +1,19 @@
 "use client";
 
-import { IoChevronForwardOutline } from "react-icons/io5";
-import React, { useEffect, useState } from "react";
-import BaseButton from "@/components/button";
+import React from "react";
 import Link from "next/link";
-import { dataBlog } from "@/data/blog";
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
-import ArticleCard from "@/components/artikelCard";
+import { IoChevronForwardOutline } from "react-icons/io5";
+import { dataBlog } from "@/data/blog";
 import SwiperComponent from "@/components/swiper";
-import CardArtikel from "@/components/cardArtikel";
+import Cards from "@/components/cards";
 
 const Home = () => {
   const fourArticles = dataBlog.slice(0, 4);
 
   return (
-    <section className="">
-      {/* <h2 className="text-[30px] text-center my-5">Infinite Insights</h2>
-      <div className="flex gap-4 flex-wrap justify-center">
-        {dataBlog.map((blog) => (
-          <Link href={`/viewBlog/${blog.id}`}>
-            <BaseButton
-              radius="sm"
-              size="md"
-              color="primary"
-              title={`To Blog Id ${blog.id}`}
-            />
-          </Link>
-        ))}
-      </div> */}
-
+    <section>
       {/* header */}
       <div className="header flex h-[90] mx-auto mt-6 rounded-xl bg-[#56a377] ps-[50px]">
         <div className="w-1/2 text-white">
@@ -58,18 +42,18 @@ const Home = () => {
         </div>
         <div className="two w-1/2">
           {fourArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
+            <Cards.CardArticleHorizon key={article.id} article={article} />
           ))}
         </div>
       </div>
       {/* end section 1 */}
 
       {/* section 2 */}
-      <div className="w-[83rem] h-[35rem] flex mt-20 mx-auto  ">
-        <div className="w-3/4 h-full ">
+      <div className="h-[35rem] flex mt-20 gap-7">
+        <div className="w-[65%] backdrop:h-full ">
           <div className="w-full h-20 ">
             <div className="flex w-full justify-between">
-              <h1 className="text-4xl h-14 border-b-5 border-gray-500 font-extrabold">
+              <h1 className="text-3xl h-14 border-b-5 border-gray-500 font-extrabold">
                 Recomendation
               </h1>
               <Link href="#" className="hover:underline">
@@ -86,16 +70,16 @@ const Home = () => {
               }}
             />
           </div>
-          <div className="flex flex-wrap-reverse justify-between items-center">
+          <div className="flex flex-wrap-reverse justify-between gap-10 items-center">
             {fourArticles.map((article) => (
-              <CardArtikel key={article.id} article={article} />
+              <Cards.CardArticle key={article.id} article={article} />
             ))}
           </div>
         </div>
-        <div className="w-1/3 h-full ">
-          <div className="w-full h-20 ms-10 ">
+        <div className="w-[35%] h-full">
+          <div className="w-full h-20">
             <div className="flex w-full">
-              <h1 className="text-4xl h-14 border-b-5 border-gray-500 font-extrabold">
+              <h1 className="text-3xl h-14 border-b-5 border-gray-500 font-extrabold">
                 Popular
               </h1>
             </div>

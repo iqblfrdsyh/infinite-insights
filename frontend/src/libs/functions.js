@@ -23,5 +23,14 @@ export function formatDate(dateString) {
   const month = months[date.getMonth()];
   const year = date.getFullYear();
 
-  return `${hours}:${minutes} ${day} ${month} ${year}`;
+  return `${hours}:${minutes}, ${day} ${month} ${year}`;
+}
+
+export function truncateContent(content, maxLength) {
+  const words = content.split(" ");
+  if (words.length > maxLength) {
+    return words.slice(0, maxLength).join(" ") + "...";
+  } else {
+    return content;
+  }
 }

@@ -223,7 +223,7 @@ exports.checkLogin = async (req, res) => {
       where: {
         id: userId,
       },
-      attributes: ["id", "username", "fullname", "headline"],
+      attributes: ["id", "username", "fullname", "headline", "password"],
     });
 
     if (!user) {

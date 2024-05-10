@@ -11,7 +11,7 @@ export function MyLayout({ children }) {
   const isLoginPage = pathname === "/login" || pathname === "/regist";
 
   return (
-    <NextUIProvider>
+    <NextUIProvider className={isLoginPage ? "" : "mx-auto px-5 sm:px-10 mw:w-[1340px] sm:w-[100%]"}>
       {!isLoginPage && <NavigationBar />}
       {children}
     </NextUIProvider>
