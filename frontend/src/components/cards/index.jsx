@@ -83,9 +83,10 @@ const Cards = {
           <div className="mb-20">
             <Image src={article.thumbnail} alt="blog-image" className="mb-3" />
             <h3 className="text-[24px] font-semibold">{article.title}</h3>
-            <p className="font-medium opacity-50">
+            <p className="font-medium opacity-50 mb-4">
               {article.kategori.join(", ")}
             </p>
+            <span className={`border-2 px-2 py-1 rounded-lg font-medium ${article.status == "Archived" ? 'border-blue-600 text-blue-600' : 'border-green-700 text-green-700'}`}>{article.status}</span>
           </div>
           <div className="absolute bottom-4 right-4 flex gap-4">
             <BaseButton

@@ -8,6 +8,7 @@ const dataUser = [
         thumbnail: "/assets/images/blog-images/programming.jpg",
         time: "2025-07-23T08:08:00",
         kategori: ["Programming", "Ngoding"],
+        status: "Archived",
       },
       {
         id: 2,
@@ -15,6 +16,7 @@ const dataUser = [
         thumbnail: "/assets/images/blog-images/programming.jpg",
         time: "2025-07-15T08:08:00",
         kategori: ["Programming", "reactjs"],
+        status: "Published",
       },
       {
         id: 3,
@@ -22,6 +24,7 @@ const dataUser = [
         thumbnail: "/assets/images/blog-images/programming.jpg",
         time: "2027-02-10T08:20:00",
         kategori: ["Tutorial", "Tips & Trick"],
+        status: "Published",
       },
     ],
   },

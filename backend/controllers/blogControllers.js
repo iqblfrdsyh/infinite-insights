@@ -8,6 +8,7 @@ const {
 } = require("../helper/relation");
 const path = require("path");
 const crypto = require("crypto");
+const fs = require("fs");
 
 exports.getBlogs = async (req, res) => {
   try {
@@ -134,8 +135,44 @@ exports.createBlog = async (req, res) => {
   const { categoryId, title, content, author, source_link, status } = req.body;
 
   try {
+    let thumbnail = "";
+
     if (!req.files || !req.files.thumbnail) {
-      return res.status(400).json({ msg: "Masukkan Gambar" });
+      const defaultThumbnailPath = "./public/images/default-thumbnail/default-thumbnail.png";
+      if (fs.existsSync(defaultThumbnailPath)) {
+        thumbnail = `${req.protocol}://${req.get(
+          "host"
+        )}/images/default-thumbnail/default-thumbnail.png`;
+      } else {
+        return res
+          .status(500)
+          .json({ msg: "File default thumbnail tidak ditemukan" });
+      }
+    } else {
+      const imageFile = req.files.thumbnail;
+      const imageTimestamp = Date.now();
+      const imageExt = path.extname(imageFile.name);
+      const imageRandomString = crypto.randomBytes(8).toString("hex");
+      const thumbnailBlog = `${imageTimestamp}-${imageRandomString}${imageExt}`;
+      const thumbnailPath = `./public/images/thumbnail-blogs/${thumbnailBlog}`;
+      thumbnail = `${req.protocol}://${req.get(
+        "host"
+      )}/images/thumbnail-blogs/${thumbnailBlog}`;
+
+      const allowedType = [".png", ".jpg", ".jpeg"];
+      if (!allowedType.includes(imageExt.toLowerCase()))
+        return res.status(422).json({ msg: "invalid image type" });
+
+      const maxSize = 10000000;
+      if (imageFile.size > maxSize) {
+        return res.status(422).json({ msg: "tidak boleh melebihi 10mb" });
+      }
+
+      imageFile.mv(thumbnailPath, async (err) => {
+        if (err) {
+          return res.status(500).json({ msg: err.message });
+        }
+      });
     }
 
     if (
@@ -152,60 +189,35 @@ exports.createBlog = async (req, res) => {
     const user = await User.findByPk(userId);
     if (!user) return res.status(404).json({ msg: "User tidak ada" });
 
-    const imageFile = req.files.thumbnail;
-    const imageTimestamp = Date.now();
-    const imageExt = path.extname(imageFile.name);
-    const imageRandomString = crypto.randomBytes(8).toString("hex");
-    const thumbnailBlog = `${imageTimestamp}-${imageRandomString}${imageExt}`;
-    const thumbnail = `${req.protocol}://${req.get(
-      "host"
-    )}/images/thumbnail-blogs/${thumbnailBlog}`;
-    const imagePath = `./public/images/thumbnail-blogs/${thumbnailBlog}`;
+    try {
+      const newBlog = await Blog.create({
+        userId,
+        title,
+        content,
+        author: author || user.username,
+        thumbnail: thumbnail || "",
+        source_link,
+        views: 0,
+        status,
+      });
 
-    const allowedType = [".png", ".jpg", ".jpeg"];
-    if (!allowedType.includes(imageExt.toLowerCase()))
-      return res.status(422).json({ msg: "invalid image type" });
+      await Promise.all(
+        categoryId.map(async (categoryId) => {
+          const category = await Category.findAll({
+            where: { id: categoryId },
+          });
+          if (!category)
+            throw new Error(`Tidak ada category dengan id ${categoryId}`);
 
-    const maxSize = 10000000;
-    if (imageFile.size > maxSize) {
-      return res.status(422).json({ msg: "tidak boleh melebihi 10mb" });
+          await BlogCategory.create({ blogId: newBlog.id, categoryId });
+        })
+      );
+
+      res.status(201).json({ status: "Created", newBlog });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ msg: "Internal Server Error" });
     }
-
-    imageFile.mv(imagePath, async (err) => {
-      if (err) {
-        return res.status(500).json({ msg: err.message });
-      }
-
-      try {
-        const newBlog = await Blog.create({
-          userId,
-          title,
-          content,
-          author: author || user.username,
-          thumbnail: thumbnail || "",
-          source_link,
-          views: 0,
-          status,
-        });
-
-        await Promise.all(
-          categoryId.map(async (categoryId) => {
-            const category = await Category.findAll({
-              where: { id: categoryId },
-            });
-            if (!category)
-              throw new Error(`Tidak ada category dengan id ${categoryId}`);
-
-            await BlogCategory.create({ blogId: newBlog.id, categoryId });
-          })
-        );
-
-        res.status(201).json({ status: "Created", newBlog });
-      } catch (error) {
-        console.log(error);
-        res.status(500).json({ msg: "Internal Server Error" });
-      }
-    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "Internal Server Error" });

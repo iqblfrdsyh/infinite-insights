@@ -4,7 +4,13 @@ import BaseButton from "@/components/button";
 import { CustomCheckbox } from "@/components/customCheckbox";
 import InputFile from "@/components/inputFile";
 import { dataCategory } from "@/data/category";
-import { CheckboxGroup, Input, Textarea } from "@nextui-org/react";
+import {
+  CheckboxGroup,
+  Input,
+  Radio,
+  RadioGroup,
+  Textarea,
+} from "@nextui-org/react";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -34,7 +40,7 @@ const CreateBlog = () => {
             className="col-span-12 md:col-span-6 mb-6 md:mb-0"
           />
           <InputFile />
-          <div className="flex flex-col gap-1 w-full">
+          <div className="flex flex-col gap-1 w-full mb-3">
             <CheckboxGroup
               isRequired
               className="gap-1"
@@ -51,6 +57,14 @@ const CreateBlog = () => {
             </CheckboxGroup>
             <p className="mt-4 ml-1">Selected: {groupSelected.join(", ")}</p>
           </div>
+          <RadioGroup
+            isRequired
+            label="Select The Status Blog"
+            orientation="horizontal"
+          >
+            <Radio value="Archived">Archived</Radio>
+            <Radio value="Published">Published</Radio>
+          </RadioGroup>
           <div className="flex gap-3 justify-end mt-8">
             <Link href="/profile">
               <BaseButton title="Cancel" color="danger" />
