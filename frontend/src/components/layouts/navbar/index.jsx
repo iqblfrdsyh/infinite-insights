@@ -165,7 +165,7 @@ const NavigationBar = () => {
           </NavbarMenuItem>
         </NavbarMenu>
       </Navbar>
-      {pathname === "/profile" || pathname === "/myblog" ? null : (
+      {pathname === "/profile" || pathname === "/myblog" || pathname === "/createBlog" ? null : (
         <ScrollShadow
           size={30}
           orientation="horizontal"

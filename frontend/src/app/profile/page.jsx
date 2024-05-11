@@ -8,6 +8,7 @@ import { getUser, refreshToken } from "@/libs/api-libs";
 import React, { useEffect, useState } from "react";
 import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import BaseButton from "@/components/button";
+import Link from "next/link";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -59,7 +60,9 @@ const Profile = () => {
           My <span className="text-green-700">Blogs</span>
         </h2>
         <div className="flex justify-end my-10">
-          <BaseButton title="Create New Blog" color="primary" radius="sm" />
+          <Link href="/createBlog">
+            <BaseButton title="Create New Blog" color="primary" radius="sm" />
+          </Link>
         </div>
         <div className="flex flex-wrap gap-10 justify-center">
           {dataUser[0].blogs.map((data, index) => (
