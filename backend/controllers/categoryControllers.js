@@ -6,7 +6,7 @@ exports.getCategories = async (req, res) => {
       include: { model: Blog, as: "blogs" },
     });
     !data.length
-      ? res.json({ msg: "Tidak ada data category" })
+      ? res.status(404).json({ msg: "Tidak ada data category" })
       : res.status(200).json({ status: "Ok", total: data.length, data });
   } catch (error) {
     console.log(error);
@@ -31,17 +31,27 @@ exports.deleteCategory = async (req, res) => {
   try {
     const { categoryId } = req.query;
 
-    const category = await Category.findOne({ where: { id: categoryId } });
+    const categoryIds = categoryId.split(",");
 
+    const indexToRemove = categoryIds.indexOf(categoryId);
+    if (indexToRemove !== -1) {
+      categoryIds.splice(indexToRemove, 1);
+    }
+
+    const updatedCategoryId = categoryIds.join(",");
+
+    await Blog.update(
+      { categoryId: updatedCategoryId },
+      { where: { categoryId } }
+    );
+
+    const category = await Category.findOne({ where: { id: categoryId } });
     if (!category) {
       return res
         .status(404)
         .json({ msg: `Tidak ada kategori dengan id ${categoryId}` });
     }
-
     await category.destroy();
-
-    await Blog.update({ categoryId: null }, { where: { categoryId } });
 
     res.status(200).json({ status: "deleted", categoryId });
   } catch (error) {

@@ -9,7 +9,7 @@ exports.getUsers = async (req, res) => {
       include: [{ model: Blog, as: "blogs" }],
     });
     !data.length
-      ? res.json({ msg: "Tidak ada data user" })
+      ? res.status(404).json({ msg: "Tidak ada data user" })
       : res.status(200).json({ status: "Ok", total: data.length, data });
   } catch (error) {
     console.log(error);
@@ -21,7 +21,7 @@ exports.getUserById = async (req, res) => {
   try {
     const data = await User.findAll({ where: { id: userId } });
     !data.length
-      ? res.json({ msg: `Tidak ada user dengan insight ID : ${userId}` })
+      ? res.status(404).json({ msg: `Tidak ada user dengan insight ID : ${userId}` })
       : res.status(200).json({ status: "Ok", data });
   } catch (error) {
     console.log(error);

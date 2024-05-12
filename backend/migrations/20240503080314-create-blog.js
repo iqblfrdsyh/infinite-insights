@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       categoryId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       title: {
         type: Sequelize.STRING,
@@ -34,7 +34,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       status: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM("Published", "Archived"),
       },
       createdAt: {
         allowNull: false,

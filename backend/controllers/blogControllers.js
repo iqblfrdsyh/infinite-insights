@@ -6,6 +6,7 @@ const {
   Category,
   BlogCategory,
 } = require("../helper/relation");
+const { Op } = require("sequelize");
 const path = require("path");
 const crypto = require("crypto");
 const fs = require("fs");
@@ -29,7 +30,7 @@ exports.getBlogs = async (req, res) => {
       ],
     });
     !data.length
-      ? res.json({ msg: "Tidak ada data blog" })
+      ? res.status(404).json({ msg: "Tidak ada data blog" })
       : res.status(200).json({ status: "Ok", total: data.length, data });
   } catch (error) {
     console.log(error);
@@ -45,19 +46,6 @@ exports.getBlogById = async (req, res) => {
       attributes: {
         exclude: ["userId"],
       },
-      include: [
-        {
-          model: Commentar,
-          as: "comments",
-          attributes: ["id", "userId", "commentar"],
-        },
-        {
-          model: Category,
-          as: "categories",
-          through: { attributes: [] },
-          attributes: ["id", "category"],
-        },
-      ],
       where: {
         blogId,
         viewedBy: userId,
@@ -73,7 +61,20 @@ exports.getBlogById = async (req, res) => {
 
     const blog = await Blog.findAll({
       where: { id: blogId },
-      attributes: { exclude: ["userId"] },
+      attributes: { exclude: ["userId", "categoryId"] },
+      include: [
+        {
+          model: Commentar,
+          as: "comments",
+          attributes: ["id", "userId", "commentar"],
+        },
+        {
+          model: Category,
+          as: "categories",
+          through: { attributes: [] },
+          attributes: ["id", "category"],
+        },
+      ],
     });
 
     if (!blog) {
@@ -126,6 +127,46 @@ exports.getBlogByCategory = async (req, res) => {
   }
 };
 
+exports.searchBlogs = async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const blogs = await Blog.findAll({
+      attributes: { exclude: ["userId", "categoryId"] },
+      include: [
+        {
+          model: Commentar,
+          as: "comments",
+          attributes: ["id", "userId", "commentar"],
+        },
+        {
+          model: Category,
+          as: "categories",
+          through: { attributes: [] },
+          attributes: ["id", "category"],
+        },
+      ],
+      where: {
+        [Op.or]: [
+          { title: { [Op.like]: `%${query}%` } },
+          { content: { [Op.like]: `%${query}%` } },
+        ],
+      },
+    });
+
+    if (!blogs.length) {
+      return res
+        .status(404)
+        .json({ msg: `Tidak ada hasil pencarian untuk query: ${query}` });
+    }
+
+    res.status(200).json({ status: "Ok", total: blogs.length, data: blogs });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+};
+
 function trimmedValue(value) {
   const isString = typeof value === "string" ? value : String(value);
   return isString.trim() ? true : false;
@@ -138,7 +179,8 @@ exports.createBlog = async (req, res) => {
     let thumbnail = "";
 
     if (!req.files || !req.files.thumbnail) {
-      const defaultThumbnailPath = "./public/images/default-thumbnail/default-thumbnail.png";
+      const defaultThumbnailPath =
+        "./public/images/default-thumbnail/default-thumbnail.png";
       if (fs.existsSync(defaultThumbnailPath)) {
         thumbnail = `${req.protocol}://${req.get(
           "host"
@@ -178,10 +220,25 @@ exports.createBlog = async (req, res) => {
     if (
       !trimmedValue(title) ||
       !trimmedValue(content) ||
-      !Array.isArray(categoryId) ||
       !trimmedValue(status)
     ) {
       return res.status(400).json({ msg: "Data tidak boleh kosong" });
+    }
+
+    if (!categoryId)
+      return res.status(400).json({ msg: "Category tidak boleh kosong" });
+
+    const categoryIds = Array.isArray(categoryId)
+      ? categoryId
+      : categoryId.split(",").map(Number);
+
+    for (const id of categoryIds) {
+      const category = await Category.findByPk(id);
+      if (!category) {
+        return res
+          .status(404)
+          .json({ msg: `Tidak ada kategori dengan id ${id}` });
+      }
     }
 
     const userId = req.userId;
@@ -192,6 +249,7 @@ exports.createBlog = async (req, res) => {
     try {
       const newBlog = await Blog.create({
         userId,
+        categoryId: categoryIds.join(","),
         title,
         content,
         author: author || user.username,
@@ -202,10 +260,11 @@ exports.createBlog = async (req, res) => {
       });
 
       await Promise.all(
-        categoryId.map(async (categoryId) => {
+        categoryIds.map(async (categoryId) => {
           const category = await Category.findAll({
             where: { id: categoryId },
           });
+
           if (!category)
             throw new Error(`Tidak ada category dengan id ${categoryId}`);
 

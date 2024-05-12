@@ -1,3 +1,83 @@
 template create model :
 
 npx sequelize-cli model:generate --name blogCategory --attributes blogId:integer,categoryId:integer
+
+> Endpoint list
+
+API Blog
+ Get all
+        /blogs
+ Get by id
+       /blog?blogId=
+ Get by category
+       /blog/category?category=
+ Search blog
+       /blogs/search?query=
+ Create blog
+      /blog/create
+ Update blog
+      /blog/update?blogId=
+ Delete blog
+     /blog/delete?blogId=
+API Category
+ Get all category
+    /categories
+ Create category
+    /category/create
+ Delete category
+    /category/delete?categoryId=
+API Commentar
+ Get all
+     /comments
+ Create comment
+     /comment/create?blogId=
+ Delete comment
+     /comment/delete?commentId=
+API User
+ Get all
+     /users
+ Get user by id
+     /user?userId=
+ Login user
+     /user/signin
+ Register user
+     /user/signup
+ Update user
+     /user/update
+ Logout user
+     /user/logout
+ Get data user login
+     /user/me
+ Get token
+     /token
+
+> Endpoint with require token
+
+API Blog
+ /blog/create
+ /blog
+API User
+ /user/me
+ /user/update
+ /token
+API Commentar
+ /comment/create
+ /comment/delete
+
+> Endpoint with query
+
+API Blog
+ /blogs/search?query=
+ /blog?blogId=
+ /blog/category?category=
+ /blog/delete?blogId=
+ /blog/update?blogId=
+API Category
+ /category/delete?categoryId=
+API Commentar
+ /comment/create?blogId=
+ /comment/delete?commentId=
+API User
+ /user?userId=
+
+

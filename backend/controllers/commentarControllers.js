@@ -11,7 +11,7 @@ exports.getComments = async (req, res) => {
       attributes: { exclude: ["userId"] },
     });
     !data.length
-      ? res.json({ msg: "Tidak ada komentar" })
+      ? res.status(404).json({ msg: "Tidak ada komentar" })
       : res.status(200).json({ status: "Ok", total: data.length, data });
   } catch (error) {
     console.log(error);
