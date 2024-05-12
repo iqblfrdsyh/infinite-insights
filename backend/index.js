@@ -19,7 +19,6 @@ app.use(
   })
 );
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "./api-docs")));
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(fileUpload());
 app.use(cookieParser());

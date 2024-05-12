@@ -4,8 +4,8 @@ const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 
-const baseRoutes = path.resolve("./api-docs/swagger/routes");
-const baseSchemas = path.resolve("./api-docs/swagger/schemas");
+const baseRoutes = path.resolve("./public/api-docs/swagger/routes");
+const baseSchemas = path.resolve("./public/api-docs/swagger/schemas");
 
 const getPathRoutes = (filePath) => path.join(baseRoutes, filePath);
 const getPathSchemas = (filePath) => path.join(baseSchemas, filePath);
