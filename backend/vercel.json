@@ -12,7 +12,7 @@
     },
     {
       "src": "/docs/swagger/routes/(.*)",
-      "destination": "/var/task/docs/swagger/routes/$1"
+      "dest": "/var/task/docs/swagger/routes/$1"
     },
     {
       "src": "/(.*)",
