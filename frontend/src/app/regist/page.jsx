@@ -1,44 +1,52 @@
 "use client";
+
 import React, { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import { Input, Button, Link, Image } from "@nextui-org/react";
+import { Input, Button, Image } from "@nextui-org/react";
+import Link from "next/link";
+import Swal from "sweetalert2";
+import { signup } from "@/libs/api-libs";
 
 const Regist = () => {
-    const [nama, setNama] = useState("");
-    const [username, setUsername] = useState("");
-    const [pass, setPass] = useState("");
-    const [cpass, setCpass] = useState("");
-    const router = useRouter();
+  const [fullname, setFullname] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const router = useRouter();
 
-    const Register = async(e) =>{
-      e.preventDefault();
-      try {
-        await axios.post("http://localhost:8080/user/signup", {
-          nama: nama,
-          username: username,
-          pass: pass,
-          cpass: pass,
+  const register = async (e) => {
+    e.preventDefault();
+    try {
+      const data = {
+        fullname,
+        username,
+        password,
+        confirmPassword,
+      };
+      await signup("user/signup", data);
+      router.push("/login");
+    } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response.data.msg,
         });
-        router.push("/login");
-      } catch (error) {
-        if(error.response){
-          console.log(error.response.data);
-        }
       }
     }
+  };
 
   return (
     <div className="h-screen flex">
       <div className="relative bg-white w-1/2 border-e-2 pe-10">
         <Image
           src="/assets/images/pentol.png"
-          className="object-cover w-full h-full"
+          className="object-cover w-screen h-screen flex justify-center items-center"
           alt="Gambar latar belakang"
         />
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
+        <div className="absolute top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-20">
           <div className="text-center flex">
-            <Image src="/assets/images/logo.png" className="me-2" />
+            <Image src="/assets/images/logo.png" className="me-3" />
             <h2 className="text-6xl font-nunito font-semibold">Insight</h2>
           </div>
           <div className="text-center mt-2">
@@ -52,7 +60,7 @@ const Regist = () => {
           Create your account Infinite Insights
         </h5>
 
-        <form onSubmit={Register}>
+        <form onSubmit={register}>
           <div className="w-96 mx-auto mt-10">
             <Input
               type="text"
@@ -60,8 +68,8 @@ const Regist = () => {
               variant="bordered"
               placeholder=""
               className="mb-3"
-              value={nama}
-              onChange={(e) => setNama(e.target.value)}
+              value={fullname}
+              onChange={(e) => setFullname(e.target.value)}
             />
             <Input
               type="text"
@@ -74,25 +82,29 @@ const Regist = () => {
             />
 
             <Input
-              type="text"
+              type="password"
               label="Password"
               variant="bordered"
               placeholder=""
               className="mb-3"
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Input
-              type="text"
+              type="password"
               label="Confirm Password"
               variant="bordered"
               placeholder=""
-              value={cpass}
-              onChange={(e) => setCpass(e.target.value)}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
 
-            <Button color="success" className="text-white w-full mt-10">
+            <Button
+              color="success"
+              type="submit"
+              className="text-white w-full mt-10"
+            >
               Create Account
             </Button>
 

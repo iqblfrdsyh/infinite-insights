@@ -1,12 +1,13 @@
 const dataBlog = [
   {
     id: 1,
-    title: "Programming is easy?",
+    title: "Programming is easy? ga mungkin, anda mungkin mumet",
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
-    image: "./assets/images/blog-images/programming.jpg",
-    category: "Programming",
-    tags: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
+    image: "/assets/images/blog-images/programming.jpg",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
+    category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {
         id: 1,
@@ -37,12 +38,13 @@ const dataBlog = [
   },
   {
     id: 2,
-    title: "Programming is easy?",
+    title: "gini amat hidup, berikut solusinya agar anda sukses",
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
-    image: "./assets/images/blog-images/programming.jpg",
-    category: "Programming",
-    tags: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
+    image: "/assets/images/blog-images/estetik.jpg",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
+    category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {
         id: 1,
@@ -63,12 +65,13 @@ const dataBlog = [
   },
   {
     id: 3,
-    title: "Programming is easy?",
+    title: "yahaha gojo mati? 7 karakter mirip gojo",
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
-    image: "./assets/images/blog-images/programming.jpg",
-    category: "Programming",
-    tags: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
+    image: "/assets/images/blog-images/what.jpeg",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
+    category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {
         id: 1,
@@ -89,12 +92,13 @@ const dataBlog = [
   },
   {
     id: 4,
-    title: "Programming is easy?",
+    title: "lemon is comeback, anjay. inilah build tersakit miya",
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
-    image: "./assets/images/blog-images/programming.jpg",
-    category: "Programming",
-    tags: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
+    image: "/assets/images/blog-images/programming.jpg",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
+    category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {
         id: 1,
@@ -110,12 +114,13 @@ const dataBlog = [
   },
   {
     id: 5,
-    title: "Programming is easy?",
+    title: "Programming is easy? gatau males pengen beli truk",
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate necessitatibus optio, ipsum nisi dolore voluptates ratione eum ea vitae repellat delectus suscipit vero maiores. Aliquid possimus mollitia ducimus aspernatur nesciunt. Dolor accusamus cupiditate architecto culpa facilis maiores voluptatum officia? Consequuntur officiis atque nemo amet cumque est in distinctio tenetur excepturi? Doloribus laudantium iusto dolor! Ipsum natus dolorem quasi enim eum officia deserunt quam expedita debitis quia molestiae, nulla voluptates distinctio incidunt, inventore soluta fugit aut cupiditate voluptatibus quisquam dolore ullam eveniet unde cumque! Sunt, porro minus, laborum voluptate similique possimus neque, incidunt ipsa ratione hic culpa voluptas laboriosam alias vitae!",
-    image: "./assets/images/blog-images/programming.jpg",
-    category: "Programming",
-    tags: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
+    image: "/assets/images/blog-images/programming.jpg",
+    time: "2045-03-23T08:13:00",
+    desk:"omaga ini paling word eat untuk di baca omaga omaga debest cui wkwkwk mantap",
+    category: ["NextJS", "ReactJS", "TailwindCSS", "Programmer", "Code"],
     commentar: [
       {
         id: 1,
