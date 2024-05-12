@@ -3,8 +3,13 @@ const swaggerUI = require("swagger-ui-express");
 const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
-const baseRoutes = path.resolve("./docs/swagger/routes");
-const baseSchemas = path.resolve("./docs/swagger/schemas");
+
+const baseRoutes = path.resolve(
+  process.env.BASE_ROUTES_PATH || "../docs/swagger/routes"
+);
+const baseSchemas = path.resolve(
+  process.env.BASE_SCHEMAS_PATH || "../docs/swagger/schemas"
+);
 
 const getPathRoutes = (filePath) => path.join(baseRoutes, filePath);
 const getPathSchemas = (filePath) => path.join(baseSchemas, filePath);
