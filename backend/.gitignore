@@ -1,5 +1,8 @@
 # dependencies
 /node_modules
 
+/public/images/default/thumbnail-blogs/*
+/public/images/default/default-thumbnail/*
+
 # env files
 .env
