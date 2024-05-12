@@ -7,10 +7,7 @@
     }
   ],
   "routes": [
-    {
-      "src": "/v1/api-docs/",
-      "dest": "helper/generate.docs.js"
-    },
+    { "handle": "filesystem" },
     {
       "src": "/(.*)",
       "dest": "/"

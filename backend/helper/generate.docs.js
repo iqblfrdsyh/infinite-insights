@@ -1,8 +1,8 @@
-require("dotenv").config();
 const swaggerDocs = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 const fs = require("fs");
 const path = require("path");
+require("dotenv").config();
 
 const baseRoutes = path.resolve("./docs/swagger/routes");
 const baseSchemas = path.resolve("./docs/swagger/schemas");
