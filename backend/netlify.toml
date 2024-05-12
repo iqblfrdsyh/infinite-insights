@@ -1,0 +1,15 @@
+[build]
+  # Direktori output dari build
+  publish = "public"
+
+  # Perintah untuk membangun proyek
+  command = "npm install"
+
+  # Menetapkan versi Node.js yang akan digunakan
+  node_version = "21"
+
+[[redirects]]
+  # Mengalihkan semua permintaan ke server untuk diproses oleh Node.js
+  from = "/*"
+  to = "/index.js"
+  status = 200
