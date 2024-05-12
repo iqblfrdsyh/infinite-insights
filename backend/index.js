@@ -7,6 +7,8 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 const routes = require("./routes/index");
 const generateDocs = require("./helper/generate.docs");
+const swaggerUI = require('swagger-ui-express')
+const apiDocs = require('./docs/api-docs.json')
 
 const app = express();
 const PORT = process.env.PORT;
@@ -25,7 +27,8 @@ app.use(cookieParser());
 app.use(express.json({ limit: "10mb" }));
 
 // generate docs swagger
-generateDocs(app);
+// generateDocs(app);
+app.use('/v1/api-docs', swaggerUI.serve, swaggerUI.setup(apiDocs))
 
 // use router
 Object.values(routes).forEach((route) => {

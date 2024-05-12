@@ -1,6 +1,6 @@
 const swaggerDocs = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
-const fs = require("fs").promises;
+const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 
@@ -10,21 +10,14 @@ const baseSchemas = path.resolve("./public/api-docs/swagger/schemas");
 const getPathRoutes = (filePath) => path.join(baseRoutes, filePath);
 const getPathSchemas = (filePath) => path.join(baseSchemas, filePath);
 
-const getDocs = async (basePath, getPath) => {
-  try {
-    const files = await fs.readdir(basePath);
-    return files.reduce(async (accPromise, file) => {
-      const acc = await accPromise;
-      const data = require(getPath(`/${file}`));
-      return {
-        ...acc,
-        ...data,
-      };
-    }, Promise.resolve({}));
-  } catch (error) {
-    console.error("Error reading directory:", error);
-    return {};
-  }
+const getDocs = (basePath, getPath) => {
+  return fs.readdirSync(basePath).reduce((acc, file) => {
+    const data = require(getPath(`/${file}`));
+    return {
+      ...acc,
+      ...data,
+    };
+  }, {});
 };
 
 module.exports = function generateDocs(app) {
