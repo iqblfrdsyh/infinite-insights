@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/v1/api-docs/",
+      "dest": "helper/generate.docs.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/"
     }
