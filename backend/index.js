@@ -5,6 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const path = require("path");
+const morgan = require('morgan')
 const routes = require("./routes/index");
 const swaggerUI = require("swagger-ui-express");
 const apiDocs = require("./docs/api-docs.json");
@@ -19,6 +20,7 @@ app.use(
     origin: ["http://localhost:3000"],
   })
 );
+app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(fileUpload());
