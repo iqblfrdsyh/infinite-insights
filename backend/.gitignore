@@ -1,6 +1,9 @@
 # dependencies
 /node_modules
 
+./public/api-docs\swagger
+./helper/generate.docs.js
+
 # env files
 .env
 .env.prod
