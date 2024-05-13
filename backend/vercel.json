@@ -8,6 +8,16 @@
   ],
   "routes": [
     {
+      "src": "/api-docs.json",
+      "dest": "/docs/api-docs.json",
+      "headers": { "Content-Type": "application/json" }
+    },
+    {
+      "src": "/api-docs.yaml",
+      "dest": "/docs/api-docs.yaml",
+      "headers": { "Content-Type": "application/yaml" }
+    },
+    {
       "src": "/(.*)",
       "dest": "/"
     }
