@@ -7,13 +7,13 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api-docs.json",
+    {   
+      "src": "/v1/api-docs",
       "dest": "/docs/api-docs.json",
       "headers": { "Content-Type": "application/json" }
     },
     {
-      "src": "/api-docs.yaml",
+      "src": "/v1/api-docs",
       "dest": "/docs/api-docs.yaml",
       "headers": { "Content-Type": "application/yaml" }
     },
